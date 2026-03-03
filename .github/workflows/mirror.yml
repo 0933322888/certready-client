@@ -32,6 +32,10 @@ jobs:
           git config --global user.name "mirror-bot"
           git config --global user.email "mirror@example.com"
 
+      # Unset the header added by actions/checkout so the push uses MIRROR_TOKEN, not GITHUB_TOKEN
+      - name: Remove checkout auth (use PAT for push)
+        run: git config --unset-all http.https://github.com/.extraheader || true
+
       - name: Mirror to certready-client
         env:
           TOKEN: ${{ secrets.MIRROR_TOKEN }}
