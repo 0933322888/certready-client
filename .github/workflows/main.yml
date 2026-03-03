@@ -1,0 +1,49 @@
+name: Mirror to Deployment Repositories
+
+on:
+  push:
+    branches:
+      - main   # change if your default branch is different
+
+permissions:
+  contents: write
+
+jobs:
+  mirror:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout source repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0   # required for mirror
+
+      - name: Verify token exists
+        run: |
+          if [ -z "${{ secrets.MIRROR_TOKEN }}" ]; then
+            echo "MIRROR_TOKEN is not set"
+            exit 1
+          else
+            echo "MIRROR_TOKEN detected"
+          fi
+
+      - name: Configure Git identity
+        run: |
+          git config --global user.name "mirror-bot"
+          git config --global user.email "mirror@example.com"
+
+      # Unset the header added by actions/checkout so the push uses MIRROR_TOKEN, not GITHUB_TOKEN
+      - name: Remove checkout auth (use PAT for push)
+        run: git config --unset-all http.https://github.com/.extraheader || true
+
+      - name: Mirror to certready-client
+        env:
+          TOKEN: ${{ secrets.MIRROR_TOKEN }}
+        run: |
+          git push --mirror https://x-access-token:$TOKEN@github.com/0933322888/certready-client.git
+
+      - name: Mirror to certready-api
+        env:
+          TOKEN: ${{ secrets.MIRROR_TOKEN }}
+        run: |
+          git push --mirror https://x-access-token:$TOKEN@github.com/0933322888/certready-api.git
