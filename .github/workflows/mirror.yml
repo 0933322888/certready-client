@@ -15,7 +15,12 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Push to mirror repo
+      - name: Push to Repo B
         run: |
-          git remote add mirror https://x-access-token:${{ secrets.MIRROR_TOKEN }}@github.com/0933322888/certready-client.git
-          git push mirror main --force
+          git remote add mirror-b https://x-access-token:${{ secrets.MIRROR_TOKEN }}@github.com/0933322888/certready-client.git
+          git push mirror-b main --force
+
+      - name: Push to Repo C
+        run: |
+          git remote add mirror-c https://x-access-token:${{ secrets.MIRROR_TOKEN }}@github.com/0933322888/certready-api.git
+          git push mirror-c main --force
