@@ -91,6 +91,48 @@ export const tradeGuides = [
       'Know all pipe joining methods and which materials they apply to',
     ],
   },
+  {
+    slug: 'construction-electrician',
+    courseSlug: 'construction-electrician-309a',
+    tradeName: 'Construction Electrician',
+    tradeCode: '309A',
+    examQuestions: 100,
+    passMark: 70,
+    apprenticeshipHours: 7200,
+    apprenticeshipLevels: 4,
+    examWeighting: [
+      { area: 'Common Occupational Skills (MWA A)', percent: 12 },
+      { area: 'Installation (MWA B)', percent: 26 },
+      { area: 'Maintenance & Commissioning (MWA C)', percent: 34 },
+      { area: 'Fault Diagnosis & Repair (MWA D)', percent: 18 },
+      { area: 'Other (MWA E)', percent: 10 },
+    ],
+    faqs: [
+      {
+        question: 'How many questions are on the Red Seal Construction Electrician exam?',
+        answer: 'The Red Seal Construction Electrician (309A) interprovincial exam contains 100 multiple-choice questions. A minimum score of 70% is required to pass.',
+      },
+      {
+        question: 'What is the most important topic on the Red Seal Construction Electrician exam?',
+        answer: 'MWA C (Maintenance & Commissioning) has the highest weighting at 34% of the exam — roughly 34 questions. MWA B (Installation) is next at 26%.',
+      },
+      {
+        question: 'How long is the Construction Electrician apprenticeship in Canada?',
+        answer: 'The Construction Electrician Red Seal apprenticeship requires 7,200 hours of training across 4 levels, combining on-the-job experience with in-school technical training.',
+      },
+      {
+        question: 'Is the Canadian Electrical Code (CEC) referenced on the exam?',
+        answer: 'Yes. The Red Seal exam is based on the Red Seal Occupational Standard and references the Canadian Electrical Code. Familiarity with CEC sections and application is essential.',
+      },
+    ],
+    topStudyTips: [
+      'Focus on MWA C first — at 34% it is the most tested area',
+      'Know safety (PPE, arc flash, LOTO) and tools thoroughly — MWA A is 12%',
+      'Memorize key CEC formulas and application (voltage drop, conduit fill, etc.)',
+      'Understand commissioning and testing procedures for various systems',
+      'Practice fault diagnosis scenarios across all system types',
+    ],
+  },
 ];
 
 export function getGuideBySlug(slug) {

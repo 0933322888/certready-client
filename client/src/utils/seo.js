@@ -107,6 +107,23 @@ export function getOrganizationStructuredData() {
   };
 }
 
+/** WebSite schema — helps Google show a proper site name (e.g. "CertReady — Red Seal Exam Prep") instead of the domain in search results. */
+export function getWebSiteStructuredData() {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: 'CertReady — Red Seal Exam Prep',
+    alternateName: 'CertReady',
+    url: 'https://www.certready.ca',
+    description: 'Comprehensive Red Seal exam preparation for Canadian trades. Study guides, practice questions, and mock exams.',
+    publisher: {
+      '@type': 'Organization',
+      name: 'CertReady',
+      url: 'https://www.certready.ca',
+    },
+  };
+}
+
 export function getFAQStructuredData(faqs) {
   if (!faqs || !faqs.length) return null;
   return {

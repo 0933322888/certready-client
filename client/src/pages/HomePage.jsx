@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import SEO from '../components/seo/SEO';
-import { getHomePageSEO, getOrganizationStructuredData, getFAQStructuredData } from '../utils/seo';
+import { getHomePageSEO, getOrganizationStructuredData, getWebSiteStructuredData, getFAQStructuredData } from '../utils/seo';
 import HeroCarousel from '../components/home/HeroCarousel';
 import FeaturesSection from '../components/home/FeaturesSection';
 import CoursePreview from '../components/home/CoursePreview';
@@ -39,6 +39,7 @@ export default function HomePage() {
         {...seo}
         structuredData={[
           getOrganizationStructuredData(),
+          getWebSiteStructuredData(),
           getFAQStructuredData(HOME_FAQ_FOR_SEO),
         ]}
       />

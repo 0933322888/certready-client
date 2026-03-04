@@ -33,3 +33,6 @@ Exam preparation platform for Skilled Trades Ontario certification candidates.
 - Backend: Deploy `/server` to Vercel (e.g. as a serverless function or separate Vercel project), set env vars
 - Update `CLIENT_URL` in server env to your frontend URL
 - Register Stripe webhook endpoint in Stripe Dashboard
+
+## SEO: Favicon in Google search results
+Google often requests `/favicon.ico`. To show your icon in search results, add a `favicon.ico` file in `client/public/` (e.g. 32×32 or 48×48). You can convert `client/public/favicon-48.png` using [favicon.io](https://favicon.io/favicon-converter/) or any ICO generator, then save as `client/public/favicon.ico`.
