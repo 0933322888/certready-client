@@ -8,7 +8,7 @@ const promoSchema = new mongoose.Schema({
   validFrom: { type: Date },
   validUntil: { type: Date },
   usageCap: { type: Number }, // max total redemptions (optional)
-  usageCapPerCourse: { type: Number }, // max redemptions per course (e.g. 100 for FIRST100)
+  usageCapPerCourse: { type: Number }, // max redemptions per course (e.g. 100 for SPRING2026)
   isActive: { type: Boolean, default: true },
 }, { timestamps: true });
 

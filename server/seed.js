@@ -75,7 +75,7 @@ const courses = [
 
 const promos = [
   {
-    code: 'FIRST100',
+    code: 'SPRING2026',
     type: 'fixed_price',
     amountCents: 2999,
     public: true,
