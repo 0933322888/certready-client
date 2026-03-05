@@ -4,11 +4,13 @@ import { getGuideBySlug } from '../data/tradeGuides';
 import { getCourse } from '../data/courseContent';
 import { getFreeChapters } from '../data/courseHelpers';
 import SEO from '../components/seo/SEO';
-import { getPracticePageSEO } from '../utils/seo';
+import Breadcrumb from '../components/layout/Breadcrumb';
+import { getPracticePageSEO, getBreadcrumbStructuredData } from '../utils/seo';
 import PracticeQuestion from '../components/course/PracticeQuestion';
 import NotFoundPage from './NotFoundPage';
 import Card from '../components/ui/Card';
 import Button from '../components/ui/Button';
+import { paths } from '../utils/routes';
 
 const FREE_QUESTION_COUNT = 5;
 
@@ -38,18 +40,20 @@ export default function PracticePage() {
     tradeSlug: guide.slug,
     questionCount: freeQuestions.length,
   });
+  const breadcrumbItems = [
+    { name: t('practicePage.home'), url: paths.home },
+    { name: t('practiceTestsPage.breadcrumb'), url: paths.practiceTests },
+    { name: t('practicePage.freePracticeQuestions'), url: paths.practiceTest(guide.slug) },
+  ];
 
   return (
     <>
-      <SEO {...seo} />
+      <SEO
+        {...seo}
+        structuredData={[getBreadcrumbStructuredData(breadcrumbItems)].filter(Boolean)}
+      />
       <main className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <nav className="text-sm text-text-muted mb-8" aria-label={t('common.ariaLabelBreadcrumb')}>
-          <Link to="/" className="hover:text-accent">{t('practicePage.home')}</Link>
-          <span className="mx-2">/</span>
-          <Link to={`/guides/${guide.slug}`} className="hover:text-accent">{t('practicePage.guide', { tradeName: guide.tradeName })}</Link>
-          <span className="mx-2">/</span>
-          <span className="text-text-primary">{t('practicePage.freePracticeQuestions')}</span>
-        </nav>
+        <Breadcrumb items={breadcrumbItems} />
 
         <h1 className="text-4xl font-display font-bold text-text-primary mb-4">
           {t('practicePage.title', { tradeName: guide.tradeName })}
@@ -63,7 +67,7 @@ export default function PracticePage() {
             <p className="text-text-muted mb-4">
               {t('practicePage.noFreeQuestions')}
             </p>
-            <Link to={`/courses/${guide.courseSlug}`}>
+            <Link to={paths.trade(guide.slug)}>
               <Button>{t('practicePage.viewCourseBtn', { tradeName: guide.tradeName })}</Button>
             </Link>
           </Card>
@@ -97,7 +101,7 @@ export default function PracticePage() {
           <p className="text-text-muted mb-4">
             {t('practicePage.wantMorePractice', { tradeName: guide.tradeName, count: course.totalQuestions })}
           </p>
-          <Link to={`/courses/${guide.courseSlug}`}>
+          <Link to={paths.trade(guide.slug)}>
             <Button>{t('practicePage.viewFullCourseBtn', { tradeName: guide.tradeName })}</Button>
           </Link>
         </section>

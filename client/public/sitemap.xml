@@ -8,9 +8,19 @@
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://www.certready.ca/courses</loc>
+    <loc>https://www.certready.ca/red-seal-exam</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.95</priority>
+  </url>
+  <url>
+    <loc>https://www.certready.ca/trades</loc>
     <changefreq>weekly</changefreq>
     <priority>0.95</priority>
+  </url>
+  <url>
+    <loc>https://www.certready.ca/practice-tests</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
   </url>
   <url>
     <loc>https://www.certready.ca/guides</loc>
@@ -18,29 +28,73 @@
     <priority>0.9</priority>
   </url>
   <url>
+    <loc>https://www.certready.ca/blog</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://www.certready.ca/tools/red-seal-readiness-test</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
     <loc>https://www.certready.ca/about</loc>
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>
   </url>
 
-  <!-- Course pages -->
+  <!-- Trade exam pages (SEO-friendly slugs) -->
   <url>
-    <loc>https://www.certready.ca/courses/hairstylist-332a</loc>
+    <loc>https://www.certready.ca/trades/hairstylist</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.certready.ca/courses/plumber-306a</loc>
+    <loc>https://www.certready.ca/trades/plumber</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.certready.ca/courses/construction-electrician-309a</loc>
+    <loc>https://www.certready.ca/trades/construction-electrician</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
 
-  <!-- Guide pages -->
+  <!-- Practice test pages -->
+  <url>
+    <loc>https://www.certready.ca/practice-tests/hairstylist</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.certready.ca/practice-tests/plumber</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.certready.ca/practice-tests/construction-electrician</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Guide articles -->
+  <url>
+    <loc>https://www.certready.ca/guides/how-to-pass-red-seal-exam</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://www.certready.ca/guides/red-seal-exam-format</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://www.certready.ca/guides/red-seal-exam-cost</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
+  <!-- Trade-specific guides -->
   <url>
     <loc>https://www.certready.ca/guides/hairstylist</loc>
     <changefreq>monthly</changefreq>
@@ -53,23 +107,6 @@
   </url>
   <url>
     <loc>https://www.certready.ca/guides/construction-electrician</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <!-- Free practice pages -->
-  <url>
-    <loc>https://www.certready.ca/practice/hairstylist</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.certready.ca/practice/plumber</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.certready.ca/practice/construction-electrician</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>

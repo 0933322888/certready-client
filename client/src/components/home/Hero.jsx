@@ -32,7 +32,7 @@ export default function Hero() {
           {t('hero.subtitle')}
         </p>
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-          <Link to="/courses">
+          <Link to="/trades">
             <Button size="lg" className="w-full sm:w-auto">
               {t('hero.browseCourses')} →
             </Button>

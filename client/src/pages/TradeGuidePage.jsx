@@ -1,6 +1,7 @@
 import { useParams, Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import SEO from '../components/seo/SEO';
+import Breadcrumb from '../components/layout/Breadcrumb';
 import { getGuideBySlug } from '../data/tradeGuides';
 import {
   getTradeGuideSEO,
@@ -8,9 +9,11 @@ import {
   getBreadcrumbStructuredData,
 } from '../utils/seo';
 import NotFoundPage from './NotFoundPage';
+import { paths } from '../utils/routes';
 
-export default function TradeGuidePage() {
-  const { tradeSlug } = useParams();
+export default function TradeGuidePage({ tradeSlug: tradeSlugProp }) {
+  const { tradeSlug: paramTradeSlug, slug: paramSlug } = useParams();
+  const tradeSlug = tradeSlugProp ?? paramTradeSlug ?? paramSlug;
   const { t } = useTranslation();
   const guide = getGuideBySlug(tradeSlug);
 
@@ -19,11 +22,11 @@ export default function TradeGuidePage() {
   }
 
   const seo = getTradeGuideSEO(guide);
-  const breadcrumbs = getBreadcrumbStructuredData([
-    { name: t('tradeGuidePage.home'), url: '/' },
-    { name: t('tradeGuidePage.studyGuides'), url: '/guides' },
-    { name: guide.tradeName, url: `/guides/${guide.slug}` },
-  ]);
+  const breadcrumbs = [
+    { name: t('tradeGuidePage.home'), url: paths.home },
+    { name: t('tradeGuidePage.studyGuides'), url: paths.guides },
+    { name: guide.tradeName, url: paths.guideArticle(guide.slug) },
+  ];
 
   return (
     <>
@@ -31,17 +34,11 @@ export default function TradeGuidePage() {
         {...seo}
         structuredData={[
           getFAQStructuredData(guide.faqs),
-          breadcrumbs,
+          getBreadcrumbStructuredData(breadcrumbs),
         ].filter(Boolean)}
       />
       <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <nav className="text-sm text-text-muted mb-8" aria-label={t('common.ariaLabelBreadcrumb')}>
-          <Link to="/" className="hover:text-accent">{t('tradeGuidePage.home')}</Link>
-          <span className="mx-2">/</span>
-          <Link to="/guides" className="hover:text-accent">{t('tradeGuidePage.studyGuides')}</Link>
-          <span className="mx-2">/</span>
-          <span className="text-text-primary">{guide.tradeName}</span>
-        </nav>
+        <Breadcrumb items={breadcrumbs} />
 
         <h1 className="text-4xl md:text-5xl font-display font-bold text-text-primary mb-6">
           {t('tradeGuidePage.guideTitle', { tradeName: guide.tradeName, tradeCode: guide.tradeCode })}
@@ -130,13 +127,13 @@ export default function TradeGuidePage() {
           </p>
           <div className="flex flex-wrap gap-4">
             <Link
-              to={`/courses/${guide.courseSlug}`}
+              to={paths.trade(guide.slug)}
               className="inline-flex items-center font-semibold text-accent hover:text-accent/80"
             >
               {t('tradeGuidePage.viewCourseLink', { tradeName: guide.tradeName })}
             </Link>
             <Link
-              to={`/practice/${guide.slug}`}
+              to={paths.practiceTest(guide.slug)}
               className="inline-flex items-center font-semibold text-accent hover:text-accent/80"
             >
               {t('tradeGuidePage.tryPracticeLink')}

@@ -56,7 +56,7 @@ export default function HeroCarousel() {
               {t('hero.subtitle')}
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <Link to="/courses">
+              <Link to="/trades">
                 <Button size="lg" className="w-full sm:w-auto">
                   {t('hero.browseCourses')} →
                 </Button>
@@ -103,7 +103,7 @@ export default function HeroCarousel() {
             <p className="text-sm text-text-muted mb-8">
               {t('hero.slideDiscountSpots')}
             </p>
-            <Link to="/courses">
+            <Link to="/trades">
               <Button size="lg" className="bg-accent-warm hover:bg-accent-warm/90 text-bg font-semibold">
                 {t('hero.slideDiscountCta')}
               </Button>

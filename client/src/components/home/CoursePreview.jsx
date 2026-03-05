@@ -5,8 +5,10 @@ import Button from '../ui/Button';
 import Badge from '../ui/Badge';
 import { formatPrice } from '../../utils/formatters';
 import { getCourse, COURSE_SLUGS } from '../../data/courseContent';
+import { getGuideSlugFromCourseSlug } from '../../data/tradeGuides';
 import { useCoursePricing } from '../../hooks/useCoursePricing';
 import { useAuth } from '../../context/AuthContext';
+import { paths } from '../../utils/routes';
 
 export default function CoursePreview() {
   const { t, i18n } = useTranslation();
@@ -28,6 +30,7 @@ export default function CoursePreview() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {courses.map((course) => {
             const hasPurchased = hasPurchasedBySlug(course.slug);
+            const tradeSlug = getGuideSlugFromCourseSlug(course.slug);
             const pricing = pricingBySlug[course.slug];
             const fullPrice = pricing?.fullPrice ?? course.price;
             const currentPrice = pricing?.currentPrice ?? course.price;
@@ -47,7 +50,7 @@ export default function CoursePreview() {
                     </div>
                   </div>
                   <h3 className="text-2xl font-display font-bold text-text-primary mb-2">
-                    <Link to={`/courses/${course.slug}`} className="hover:text-accent transition-colors">
+                    <Link to={tradeSlug ? paths.trade(tradeSlug) : `/courses/${course.slug}`} className="hover:text-accent transition-colors">
                       {course.trade} Exam Prep Course
                     </Link>
                   </h3>
@@ -73,7 +76,7 @@ export default function CoursePreview() {
                       <Link to={`/learn/${course.slug}`} className="flex-1 flex">
                         <Button variant="outline" className="w-full flex items-center justify-center">{t('home.previewFreeBtn')}</Button>
                       </Link>
-                      <Link to={`/courses/${course.slug}`} className="flex-1 flex">
+                      <Link to={tradeSlug ? paths.trade(tradeSlug) : `/courses/${course.slug}`} className="flex-1 flex">
                         <Button className="w-full flex items-center justify-center">{t('home.getFullAccess')}</Button>
                       </Link>
                     </>

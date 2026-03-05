@@ -30,7 +30,7 @@ export default function PricingSection() {
               </li>
             ))}
           </ul>
-          <Link to="/courses">
+          <Link to="/trades">
             <Button size="lg" className="w-full sm:w-auto">
               {t('home.viewCourses')}
             </Button>

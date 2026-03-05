@@ -116,7 +116,7 @@ export default function CheckoutSuccessPage() {
         </div>
 
         <div className="flex flex-col gap-4">
-          <Link to={purchase?.course?.slug ? `/learn/${purchase.course.slug}` : '/courses'} className="block">
+          <Link to={purchase?.course?.slug ? `/learn/${purchase.course.slug}` : '/trades'} className="block">
             <Button size="lg" className="w-full">
               {t('checkout.startLearning')} →
             </Button>

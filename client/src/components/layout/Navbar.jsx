@@ -39,20 +39,27 @@ export default function Navbar() {
             <Link to="/" className="text-white hover:text-accent transition-colors">
               {t('nav.home')}
             </Link>
-            <Link to="/courses" className="text-white hover:text-accent transition-colors">
-              {t('nav.courses')}
+            <Link to="/red-seal-exam" className="text-white hover:text-accent transition-colors">
+              {t('nav.redSealExam')}
             </Link>
-            <Link to="/about" className="text-white hover:text-accent transition-colors">
-              {t('nav.about')}
+            <Link to="/trades" className="text-white hover:text-accent transition-colors">
+              {t('nav.trades')}
+            </Link>
+            <Link to="/practice-tests" className="text-white hover:text-accent transition-colors">
+              {t('nav.practiceTests')}
+            </Link>
+            <Link to="/guides" className="text-white hover:text-accent transition-colors">
+              {t('nav.guides')}
+            </Link>
+            <Link to="/blog" className="text-white hover:text-accent transition-colors">
+              {t('nav.blog')}
             </Link>
             {user && (
               <>
                 <Link to="/dashboard" className="text-white hover:text-accent transition-colors">
                   {t('nav.dashboard')}
                 </Link>
-                <Link to="/profile" className="text-white hover:text-accent transition-colors">
-                  {t('nav.profile')}
-                </Link>
+
               </>
             )}
           </div>
@@ -166,11 +173,39 @@ export default function Navbar() {
               {t('nav.home')}
             </Link>
             <Link
-              to="/courses"
+              to="/red-seal-exam"
               onClick={() => setMobileMenuOpen(false)}
               className="block text-text-primary hover:text-accent transition-colors"
             >
-              {t('nav.courses')}
+              {t('nav.redSealExam')}
+            </Link>
+            <Link
+              to="/trades"
+              onClick={() => setMobileMenuOpen(false)}
+              className="block text-text-primary hover:text-accent transition-colors"
+            >
+              {t('nav.trades')}
+            </Link>
+            <Link
+              to="/practice-tests"
+              onClick={() => setMobileMenuOpen(false)}
+              className="block text-text-primary hover:text-accent transition-colors"
+            >
+              {t('nav.practiceTests')}
+            </Link>
+            <Link
+              to="/guides"
+              onClick={() => setMobileMenuOpen(false)}
+              className="block text-text-primary hover:text-accent transition-colors"
+            >
+              {t('nav.guides')}
+            </Link>
+            <Link
+              to="/blog"
+              onClick={() => setMobileMenuOpen(false)}
+              className="block text-text-primary hover:text-accent transition-colors"
+            >
+              {t('nav.blog')}
             </Link>
             <Link
               to="/about"

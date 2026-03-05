@@ -11,6 +11,11 @@
   "nav": {
     "home": "Home",
     "courses": "Courses",
+    "trades": "Trades",
+    "practiceTests": "Practice Tests",
+    "guides": "Guides",
+    "blog": "Blog",
+    "redSealExam": "Red Seal Exam",
     "about": "About Us",
     "dashboard": "Dashboard",
     "profile": "Profile",
@@ -21,8 +26,8 @@
   },
   "footer": {
     "tagline": "Exam preparation for Skilled Trades Ontario certification candidates.",
-    "courses": "Courses",
-    "allCourses": "All Courses",
+    "courses": "Trades & Exams",
+    "allCourses": "All Trades",
     "studyGuides": "Study Guides",
     "hairstylist332a": "Hairstylist 332A",
     "plumber306a": "Plumber 306A",
@@ -367,7 +372,9 @@
     "subtitle": "Free guides for each trade: exam overview, topic weightings, study tips, and frequently asked questions.",
     "seoDescription": "Free study guides for Red Seal trades exams. Exam structure, weightings, study tips, and FAQs for Hairstylist, Plumber, and more.",
     "seoKeywords": "Red Seal, study guides, exam prep, Sceau rouge, Canadian trades, Hairstylist, Plumber, exam weighting, certification",
-    "readGuide": "Read guide →"
+    "readGuide": "Read guide →",
+    "articlesHeading": "Educational Articles",
+    "tradeGuidesHeading": "Trade-Specific Guides"
   },
   "tradeGuidePage": {
     "home": "Home",
@@ -401,5 +408,70 @@
     "viewCourseBtn": "View {{tradeName}} Course",
     "wantMorePractice": "Want more practice? The full {{tradeName}} course includes {{count}}+ questions and a full mock exam.",
     "viewFullCourseBtn": "View Full {{tradeName}} Course"
+  },
+  "redSealExam": {
+    "breadcrumb": "Red Seal Exam",
+    "title": "Red Seal Exam — What It Is and How to Get Certified",
+    "intro": "The Red Seal is Canada's interprovincial standard for skilled trades. Passing the Red Seal exam in your trade allows you to work across provinces and territories without re-certifying. This page explains what the Red Seal is, how the exam works, and how to prepare.",
+    "whatIsHeading": "What Is the Red Seal?",
+    "whatIsBody": "The Red Seal Program sets a common standard for trades across Canada. When you earn your Red Seal endorsement, you prove you meet the national standard for your trade. Most Red Seal exams are multiple-choice, with a typical pass mark of 70%. Exam length and topics vary by trade.",
+    "nextStepsHeading": "Next Steps",
+    "cardTradesTitle": "Browse by Trade",
+    "cardTradesDesc": "Find exam prep for your specific trade: Hairstylist, Plumber, Construction Electrician, and more.",
+    "cardPracticeTitle": "Try Practice Tests",
+    "cardPracticeDesc": "Answer free practice questions with no sign-up. Get a feel for the real exam before you buy.",
+    "cardGuidesTitle": "Read Guides",
+    "cardGuidesDesc": "Learn about exam format, cost, and how to pass. Free educational articles and trade-specific guides.",
+    "browseTrades": "Browse Trades",
+    "tryPracticeTests": "Try Practice Tests",
+    "readGuides": "Read Guides",
+    "ctaText": "Ready to start? Choose your trade and get full access to study materials, practice questions, and a mock exam.",
+    "ctaButton": "Browse All Trades"
+  },
+  "tradesPage": {
+    "breadcrumb": "Trades",
+    "title": "Red Seal Exam Prep by Trade",
+    "subtitle": "Choose your trade to see exam prep courses, study guides, and free practice questions. One-time purchase, lifetime access.",
+    "tryFreePractice": "Try free practice questions →"
+  },
+  "practiceTestsPage": {
+    "breadcrumb": "Practice Tests",
+    "title": "Free Red Seal Practice Tests",
+    "subtitle": "Try free practice questions for your trade. No sign-up required. Get a feel for the exam before you buy full prep.",
+    "cardDesc": "{{count}} exam-style questions · Free {{tradeName}} practice with explanations.",
+    "tryFreeQuestions": "Try Free Questions",
+    "fullExamPrep": "Full exam prep",
+    "ctaText": "Need full access? Get the complete course with all chapters, practice questions, and a mock exam.",
+    "browseTrades": "Browse All Trades"
+  },
+  "guideArticle": {
+    "ctaText": "Ready to prepare for your Red Seal exam? Browse our courses by trade or try free practice questions.",
+    "browseTrades": "Browse Trades",
+    "tryPracticeTests": "Try Practice Tests"
+  },
+  "readinessTest": {
+    "breadcrumb": "Readiness Test",
+    "title": "Red Seal Readiness Test",
+    "subtitle": "See if you're ready for the Red Seal exam. Quick assessment with next-step recommendations.",
+    "intro": "Choose your trade below to start. You'll answer a few questions and get personalized tips.",
+    "browseTrades": "Browse Trades",
+    "tryPracticeTests": "Try Practice Tests",
+    "whatIsHeading": "What Is This?",
+    "whatIsBody": "The readiness test helps you gauge your preparation level. Based on your answers, we'll point you to the right study materials and practice questions for your trade."
+  },
+  "blogPage": {
+    "breadcrumb": "Blog",
+    "title": "Red Seal Exam Prep Blog",
+    "subtitle": "Tips, guides, and resources to help you prepare for your Red Seal interprovincial exam.",
+    "guidesHeading": "Popular Guides",
+    "howToPassTitle": "How to Pass the Red Seal Exam",
+    "howToPassExcerpt": "Study strategies and what to focus on before test day.",
+    "examFormatTitle": "Red Seal Exam Format",
+    "examFormatExcerpt": "What to expect: question count, time, pass mark, and delivery.",
+    "examCostTitle": "Red Seal Exam Cost",
+    "examCostExcerpt": "Fees, what's included, and how to budget for your certification.",
+    "readMore": "Read more →",
+    "ctaText": "Ready to start preparing? Browse exam prep courses by trade.",
+    "browseTrades": "Browse all trades"
   }
 }

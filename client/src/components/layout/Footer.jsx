@@ -1,8 +1,9 @@
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { COURSE_SLUGS, getCourse } from '../../data/courseContent';
+import { getCourse, COURSE_SLUGS } from '../../data/courseContent';
 import { tradeGuides } from '../../data/tradeGuides';
 import { CertReadyLogoCompact } from '../brand/CertReadyLogo';
+import { paths } from '../../utils/routes';
 
 export default function Footer() {
   const { t } = useTranslation();
@@ -22,15 +23,20 @@ export default function Footer() {
             <h3 className="font-semibold text-text-primary mb-4">{t('footer.courses')}</h3>
             <ul className="space-y-2 text-sm">
               <li>
-                <Link to="/courses" className="text-text-muted hover:text-accent transition-colors">
+                <Link to={paths.trades} className="text-text-muted hover:text-accent transition-colors">
                   {t('footer.allCourses')}
                 </Link>
               </li>
               {COURSE_SLUGS.map((slug) => {
                 const course = getCourse(slug, 'en');
+                const guide = tradeGuides.find((g) => g.courseSlug === slug);
+                const tradeSlug = guide?.slug;
                 return course ? (
                   <li key={slug}>
-                    <Link to={`/courses/${slug}`} className="text-text-muted hover:text-accent transition-colors">
+                    <Link
+                      to={tradeSlug ? paths.trade(tradeSlug) : paths.course(slug)}
+                      className="text-text-muted hover:text-accent transition-colors"
+                    >
                       {course.trade} ({course.tradeCode})
                     </Link>
                   </li>
@@ -42,13 +48,16 @@ export default function Footer() {
             <h3 className="font-semibold text-text-primary mb-4">{t('footer.studyGuides')}</h3>
             <ul className="space-y-2 text-sm">
               <li>
-                <Link to="/guides" className="text-text-muted hover:text-accent transition-colors">
+                <Link to={paths.guides} className="text-text-muted hover:text-accent transition-colors">
                   All Study Guides
                 </Link>
               </li>
               {tradeGuides.map((guide) => (
                 <li key={guide.slug}>
-                  <Link to={`/guides/${guide.slug}`} className="text-text-muted hover:text-accent transition-colors">
+                  <Link
+                    to={paths.guideArticle(guide.slug)}
+                    className="text-text-muted hover:text-accent transition-colors"
+                  >
                     {guide.tradeName} Red Seal Guide
                   </Link>
                 </li>

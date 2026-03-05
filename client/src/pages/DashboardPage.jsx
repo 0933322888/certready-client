@@ -61,7 +61,7 @@ export default function DashboardPage() {
           {purchasedCourses.length === 0 ? (
             <Card className="flex flex-col">
               <p className="text-text-muted mb-4">{t('dashboard.noCourses')}</p>
-              <Link to="/courses">
+              <Link to="/trades">
                 <Button variant="outline">{t('dashboard.browseCourses')}</Button>
               </Link>
             </Card>

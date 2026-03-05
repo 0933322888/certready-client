@@ -1,5 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { getGuideSlugFromCourseSlug } from '../../data/tradeGuides';
+import { paths } from '../../utils/routes';
 import Button from './Button';
 
 export default function LockOverlay({ courseSlug, price, onPurchase, purchasing = false }) {
@@ -10,7 +12,8 @@ export default function LockOverlay({ courseSlug, price, onPurchase, purchasing 
     if (onPurchase) {
       onPurchase();
     } else {
-      navigate(`/courses/${courseSlug}`);
+      const tradeSlug = getGuideSlugFromCourseSlug(courseSlug);
+      navigate(tradeSlug ? paths.trade(tradeSlug) : paths.trades);
     }
   };
 

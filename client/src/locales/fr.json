@@ -11,6 +11,11 @@
   "nav": {
     "home": "Accueil",
     "courses": "Cours",
+    "trades": "Métiers",
+    "practiceTests": "Tests pratiques",
+    "guides": "Guides",
+    "blog": "Blog",
+    "redSealExam": "Examen Sceau rouge",
     "about": "À propos",
     "dashboard": "Tableau de bord",
     "profile": "Profil",
@@ -21,8 +26,8 @@
   },
   "footer": {
     "tagline": "Préparation aux examens pour les candidats à la certification des métiers spécialisés de l'Ontario.",
-    "courses": "Cours",
-    "allCourses": "Tous les cours",
+    "courses": "Métiers et examens",
+    "allCourses": "Tous les métiers",
     "studyGuides": "Guides d'étude",
     "hairstylist332a": "Coiffure 332A",
     "plumber306a": "Plombier 306A",
@@ -359,7 +364,9 @@
     "subtitle": "Guides gratuits par métier : aperçu de l'examen, pondération des sujets, conseils d'étude et questions fréquentes.",
     "seoDescription": "Guides d'étude gratuits pour les examens Sceau rouge. Structure, pondération, conseils et FAQ pour Coiffure, Plomberie et plus.",
     "seoKeywords": "Sceau rouge, guides d'étude, préparation examen, Red Seal, métiers Canada, Coiffure, Plomberie, pondération examen, certification",
-    "readGuide": "Lire le guide →"
+    "readGuide": "Lire le guide →",
+    "articlesHeading": "Articles éducatifs",
+    "tradeGuidesHeading": "Guides par métier"
   },
   "tradeGuidePage": {
     "home": "Accueil",
@@ -401,5 +408,70 @@
     "learnMoreAbout": "En savoir plus sur l'examen Sceau rouge {{trade}} →",
     "comingSoonTitle": "D'autres cours à venir",
     "comingSoonDesc": "Nous ajoutons d'autres cours de préparation aux examens Sceau rouge."
+  },
+  "redSealExam": {
+    "breadcrumb": "Examen Sceau rouge",
+    "title": "Examen Sceau rouge — C'est quoi et comment être certifié",
+    "intro": "Le Sceau rouge est la norme interprovinciale du Canada pour les métiers spécialisés. Réussir l'examen Sceau rouge dans votre métier vous permet de travailler partout au Canada sans recertification. Cette page explique ce qu'est le Sceau rouge, le déroulement de l'examen et comment vous préparer.",
+    "whatIsHeading": "Qu'est-ce que le Sceau rouge ?",
+    "whatIsBody": "Le Programme du Sceau rouge fixe une norme commune pour les métiers au Canada. Lorsque vous obtenez votre Sceau rouge, vous prouvez que vous respectez la norme nationale pour votre métier. La plupart des examens sont à choix multiples, avec une note de passage typique de 70 %. La longueur et les sujets varient selon le métier.",
+    "nextStepsHeading": "Prochaines étapes",
+    "cardTradesTitle": "Parcourir par métier",
+    "cardTradesDesc": "Trouvez la préparation à l'examen pour votre métier : Coiffure, Plomberie, Électricien de construction, et plus.",
+    "cardPracticeTitle": "Essayer les tests pratiques",
+    "cardPracticeDesc": "Répondez à des questions pratiques gratuites sans inscription. Découvrez l'examen avant d'acheter.",
+    "cardGuidesTitle": "Lire les guides",
+    "cardGuidesDesc": "Apprenez le format de l'examen, les coûts et comment réussir. Articles et guides par métier.",
+    "browseTrades": "Voir les métiers",
+    "tryPracticeTests": "Essayer les tests pratiques",
+    "readGuides": "Lire les guides",
+    "ctaText": "Prêt à commencer ? Choisissez votre métier et accédez au matériel d'étude, aux questions pratiques et à l'examen blanc.",
+    "ctaButton": "Voir tous les métiers"
+  },
+  "tradesPage": {
+    "breadcrumb": "Métiers",
+    "title": "Préparation à l'examen Sceau rouge par métier",
+    "subtitle": "Choisissez votre métier pour voir les cours, guides d'étude et questions pratiques gratuites. Paiement unique, accès à vie.",
+    "tryFreePractice": "Essayer les questions gratuites →"
+  },
+  "practiceTestsPage": {
+    "breadcrumb": "Tests pratiques",
+    "title": "Tests pratiques Sceau rouge gratuits",
+    "subtitle": "Essayez des questions pratiques gratuites pour votre métier. Sans inscription. Découvrez l'examen avant d'acheter la préparation complète.",
+    "cardDesc": "{{count}} questions type examen · Pratique {{tradeName}} gratuite avec explications.",
+    "tryFreeQuestions": "Essayer gratuitement",
+    "fullExamPrep": "Préparation complète",
+    "ctaText": "Besoin d'un accès complet ? Obtenez le cours avec tous les chapitres, questions pratiques et examen blanc.",
+    "browseTrades": "Voir tous les métiers"
+  },
+  "guideArticle": {
+    "ctaText": "Prêt à vous préparer à l'examen Sceau rouge ? Parcourez nos cours par métier ou essayez les questions pratiques gratuites.",
+    "browseTrades": "Voir les métiers",
+    "tryPracticeTests": "Essayer les tests pratiques"
+  },
+  "readinessTest": {
+    "breadcrumb": "Test de préparation",
+    "title": "Test de préparation Sceau rouge",
+    "subtitle": "Voyez si vous êtes prêt pour l'examen Sceau rouge. Évaluation rapide avec recommandations.",
+    "intro": "Choisissez votre métier ci-dessous pour commencer. Vous répondrez à quelques questions et obtiendrez des conseils personnalisés.",
+    "browseTrades": "Voir les métiers",
+    "tryPracticeTests": "Essayer les tests pratiques",
+    "whatIsHeading": "Qu'est-ce que c'est ?",
+    "whatIsBody": "Le test de préparation vous aide à évaluer votre niveau. Selon vos réponses, nous vous orienterons vers le bon matériel et les questions pratiques pour votre métier."
+  },
+  "blogPage": {
+    "breadcrumb": "Blog",
+    "title": "Blog — Préparation à l'examen Sceau rouge",
+    "subtitle": "Conseils, guides et ressources pour vous préparer à l'examen interprovincial Sceau rouge.",
+    "guidesHeading": "Guides populaires",
+    "howToPassTitle": "Comment réussir l'examen Sceau rouge",
+    "howToPassExcerpt": "Stratégies d'étude et quoi prioriser avant l'examen.",
+    "examFormatTitle": "Format de l'examen Sceau rouge",
+    "examFormatExcerpt": "À quoi s'attendre : nombre de questions, temps, note de passage et déroulement.",
+    "examCostTitle": "Coût de l'examen Sceau rouge",
+    "examCostExcerpt": "Frais, ce qui est inclus et comment budgéter votre certification.",
+    "readMore": "Lire la suite →",
+    "ctaText": "Prêt à vous préparer ? Parcourez les cours par métier.",
+    "browseTrades": "Voir tous les métiers"
   }
 }
