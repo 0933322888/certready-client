@@ -77,6 +77,40 @@
     <priority>0.8</priority>
   </url>
 
+  <!-- Free practice landing pages (SEO) -->
+  <url>
+    <loc>https://www.certready.ca/electrician-red-seal-practice-questions</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.certready.ca/plumber-red-seal-practice-questions</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.certready.ca/hairstylist-red-seal-practice-questions</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Trade guide pages (/trades/:slug-red-seal) -->
+  <url>
+    <loc>https://www.certready.ca/trades/hairstylist-red-seal</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://www.certready.ca/trades/plumber-red-seal</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://www.certready.ca/trades/construction-electrician-red-seal</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
   <!-- Guide articles -->
   <url>
     <loc>https://www.certready.ca/guides/how-to-pass-red-seal-exam</loc>

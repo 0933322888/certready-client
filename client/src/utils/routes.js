@@ -8,8 +8,13 @@ export const paths = {
   redSealExam: '/red-seal-exam',
   trades: '/trades',
   trade: (slug) => `/trades/${slug}`,
+  /** Trade guide page (exam overview, MWAs, sample questions) — canonical URL for the guide */
+  tradeGuide: (slug) => `/trades/${slug}-red-seal`,
   practiceTests: '/practice-tests',
   practiceTest: (slug) => `/practice-tests/${slug}`,
+  /** SEO landing: free practice questions by trade (e.g. /electrician-red-seal-practice-questions) */
+  freePracticeLanding: (tradeKey) => `/${tradeKey}-red-seal-practice-questions`,
+  mockExam: (slug) => `/practice-tests/${slug}/mock-exam`,
   guides: '/guides',
   guideArticle: (slug) => `/guides/${slug}`,
   tools: {
@@ -38,8 +43,11 @@ export const fullUrl = {
   redSealExam: `${BASE}/red-seal-exam`,
   trades: `${BASE}/trades`,
   trade: (slug) => `${BASE}/trades/${slug}`,
+  tradeGuide: (slug) => `${BASE}/trades/${slug}-red-seal`,
   practiceTests: `${BASE}/practice-tests`,
   practiceTest: (slug) => `${BASE}/practice-tests/${slug}`,
+  freePracticeLanding: (tradeKey) => `${BASE}/${tradeKey}-red-seal-practice-questions`,
+  mockExam: (slug) => `${BASE}/practice-tests/${slug}/mock-exam`,
   guides: `${BASE}/guides`,
   guideArticle: (slug) => `${BASE}/guides/${slug}`,
   blog: `${BASE}/blog`,

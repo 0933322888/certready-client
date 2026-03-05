@@ -174,68 +174,7 @@ const plumberCourse = {
               ],
             },
           ],
-          practiceQuestions: [
-            {
-              id: 'q01-01',
-              question: 'A plumber discovers a tripping hazard on the worksite. What is the FIRST correct action?',
-              options: [
-                'Continue working and report it at the end of the shift',
-                'Mitigate or eliminate the hazard immediately and communicate it to the supervisor and Health and Safety representative',
-                'Wait for the site safety officer to arrive before taking any action',
-                'Post a warning sign and leave the hazard in place',
-              ],
-              correctIndex: 1,
-              explanation: 'According to the RSOS, when a worksite hazard is identified it must be mitigated or eliminated, documented, and communicated to the supervisor and Health and Safety representative immediately.',
-            },
-            {
-              id: 'q01-02',
-              question: 'Which of the following is classified as safety EQUIPMENT (not PPE) in the plumbing trade?',
-              options: [
-                'Steel-toed boots',
-                'Fire-retardant clothing',
-                'Fall-arrest systems',
-                'Hard hat',
-              ],
-              correctIndex: 2,
-              explanation: 'PPE includes items worn on the body (boots, clothing, hard hat). Safety equipment includes fall-arrest systems, fire extinguishers, first aid kits, and smoke/fume extractors — these are tools used for safety, not worn as personal protection.',
-            },
-            {
-              id: 'q01-03',
-              question: 'What does it mean for a plumbing system to be in a "zero-energy state"?',
-              options: [
-                'The system has been flushed with clean water',
-                'All pumps are set to their minimum speed',
-                'All forms of energy have been isolated and dissipated so the system cannot move, energize, or release stored energy',
-                'The electrical panel breaker for the system has been turned off',
-              ],
-              correctIndex: 2,
-              explanation: 'A zero-energy state means ALL forms of energy — electrical, hydraulic, pneumatic, mechanical, thermal, and chemical — have been isolated and dissipated. Turning off only one type of energy does not achieve zero-energy state.',
-            },
-            {
-              id: 'q01-04',
-              question: 'When a plumber finds PPE that is worn and damaged, what is the proper procedure?',
-              options: [
-                'Continue using it if the damage is minor',
-                'Repair it on the job site and return it to service',
-                'Tag it, report it to the supervisor, and remove it from service',
-                'Discard it without reporting',
-              ],
-              correctIndex: 2,
-              explanation: 'Worn, damaged, or defective PPE must be tagged using identification markings, reported to the supervisor, and removed from service. Using damaged PPE puts the worker at serious risk.',
-            },
-            {
-              id: 'q01-05',
-              question: 'Which LOTO isolation method involves inserting a physical barrier directly into the piping?',
-              options: [
-                'Double-block-and-bleed',
-                'Breaker lock',
-                'Blinding',
-                'Tag-out only',
-              ],
-              correctIndex: 2,
-              explanation: 'Blinding involves inserting a physical barrier (such as a blind flange) directly into the piping to create a positive barrier against fluid flow. Double-block-and-bleed uses two valves with a bleed port between them.',
-            },
-          ],
+          practiceQuestions:  [],
         },
 
         // CHAPTER 2 — Tools & Equipment (MWA A-2)
@@ -388,56 +327,7 @@ const plumberCourse = {
               ],
             },
           ],
-          practiceQuestions: [
-            {
-              id: 'q02-01',
-              question: 'What is a "flashback arrestor" used for in oxy-fuel equipment?',
-              options: [
-                'To regulate the output pressure of the gas cylinder',
-                'To prevent the flame from travelling back into the hose and causing an explosion',
-                'To reduce the temperature of the torch tip',
-                'To filter impurities from the fuel gas',
-              ],
-              correctIndex: 1,
-              explanation: 'Flashback arrestors are safety devices installed on oxy-fuel hoses to stop a flashback — the dangerous condition where the flame travels backward through the hose toward the gas source. This prevents fires and explosions.',
-            },
-            {
-              id: 'q02-02',
-              question: 'What does "bird-caging" indicate in wire rope?',
-              options: [
-                'The wire rope has been properly coiled for storage',
-                'The wire rope is new and has not yet been broken in',
-                'Individual wire strands have broken and are splaying outward, indicating the rope must be removed from service',
-                'The rope is rated for aerial lifting operations',
-              ],
-              correctIndex: 2,
-              explanation: 'Bird-caging describes the condition where individual wire strands break and splay outward, resembling a bird cage. This is a critical defect — the wire rope must be immediately removed from service.',
-            },
-            {
-              id: 'q02-03',
-              question: 'At what approximate temperature does brazing differ from soldering?',
-              options: [
-                'Brazing occurs above 450°C; soldering occurs below 450°C',
-                'Brazing occurs below 200°C; soldering above 200°C',
-                'There is no temperature difference — the terms are interchangeable',
-                'Brazing occurs above 900°C; soldering above 450°C',
-              ],
-              correctIndex: 0,
-              explanation: 'By definition, brazing uses a filler metal with a melting point above 450°C (840°F), while soldering uses filler metal below this temperature. The base metal is not melted in either process.',
-            },
-            {
-              id: 'q02-04',
-              question: 'Why must inert gas (such as nitrogen) be purged through copper pipe during brazing?',
-              options: [
-                'To pre-heat the pipe evenly before applying the torch',
-                'To displace oxygen inside the pipe and prevent internal oxidation during the joining process',
-                'To test for leaks before the joint cools',
-                'To clean flux residue from the inside of the pipe',
-              ],
-              correctIndex: 1,
-              explanation: 'Purging with an inert gas (nitrogen or argon) displaces oxygen from inside the pipe. This prevents the formation of copper oxide scale inside the pipe during brazing — which could contaminate the system or restrict flow.',
-            },
-          ],
+          practiceQuestions:  [],
         },
 
         // CHAPTER 3 — Organizing Work & Documentation (MWA A-3)
@@ -508,44 +398,7 @@ const plumberCourse = {
               ],
             },
           ],
-          practiceQuestions: [
-            {
-              id: 'q03-01',
-              question: 'What are "as-built drawings"?',
-              options: [
-                'The original architectural drawings prepared by the engineer',
-                'Drawings updated to reflect the actual installed condition of all systems as they were built',
-                'Drawings used to obtain a building permit',
-                'Preliminary sketches prepared before construction begins',
-              ],
-              correctIndex: 1,
-              explanation: 'As-built drawings (also called record drawings) are updated during construction to show the actual location, size, and configuration of all installed systems. They are essential for future maintenance and renovation.',
-            },
-            {
-              id: 'q03-02',
-              question: 'What is the purpose of a maintenance manual compiled at project completion?',
-              options: [
-                'To record the daily activities of the plumbing crew',
-                'To provide the building owner with product data sheets and operating/maintenance information for all installed equipment',
-                'To document the project cost and labour hours',
-                'To serve as the permit application for future renovations',
-              ],
-              correctIndex: 1,
-              explanation: 'Maintenance manuals are compiled from product data sheets for all installed equipment and are submitted to the facility manager. They provide the building owner with the information needed to maintain, service, and troubleshoot every piece of installed equipment.',
-            },
-            {
-              id: 'q03-03',
-              question: 'Convert 250 kPa to psi (use the conversion factor: 1 kPa = 0.1450 psi).',
-              options: [
-                '36.25 psi',
-                '1,724 psi',
-                '25.0 psi',
-                '2.5 psi',
-              ],
-              correctIndex: 0,
-              explanation: '250 kPa × 0.1450 = 36.25 psi. This conversion is critical when working with pressure gauges and specifications that use different unit systems.',
-            },
-          ],
+          practiceQuestions:  [],
         },
 
         // CHAPTER 4 — Routine Trade Activities (MWA A-4)
@@ -647,44 +500,7 @@ const plumberCourse = {
               ],
             },
           ],
-          practiceQuestions: [
-            {
-              id: 'q04-01',
-              question: 'A plumber needs to make a 200 mm offset in a pipe run using two 45° elbows. What is the required travel length?',
-              options: [
-                '141.4 mm',
-                '200 mm',
-                '282.8 mm',
-                '400 mm',
-              ],
-              correctIndex: 2,
-              explanation: 'Travel = Offset × 1.414. Therefore: 200 mm × 1.414 = 282.8 mm. The constant 1.414 (√2) is provided on the official Plumber Formulas reference sheet.',
-            },
-            {
-              id: 'q04-02',
-              question: 'What is the minimum grade required by the National Plumbing Code for a 50 mm (2") drain pipe?',
-              options: [
-                '0.5% (1/16" per foot)',
-                '1% (1/8" per foot)',
-                '2% (1/4" per foot)',
-                '5% (5/8" per foot)',
-              ],
-              correctIndex: 2,
-              explanation: 'For drain pipes up to 75 mm (3") in diameter, the National Plumbing Code requires a minimum grade of 2%, which equals 1/4 inch of fall per foot of horizontal run (or 20 mm per metre).',
-            },
-            {
-              id: 'q04-03',
-              question: 'Why must fire stopping be installed where piping passes through a fire-rated wall?',
-              options: [
-                'To prevent water damage to the wall assembly',
-                'To anchor the pipe and prevent movement',
-                'To maintain the fire-resistance rating of the assembly by preventing the spread of fire and smoke through the penetration',
-                'To reduce noise transmission between rooms',
-              ],
-              correctIndex: 2,
-              explanation: 'Fire stopping is required by building and plumbing codes to maintain the fire-resistance rating of fire separations (walls, floors, ceilings). Without it, a hole through a fire wall becomes a pathway for fire and smoke to spread through the building.',
-            },
-          ],
+          practiceQuestions:  [],
         },
       ],
     },
@@ -780,32 +596,7 @@ const plumberCourse = {
               ],
             },
           ],
-          practiceQuestions: [
-            {
-              id: 'q05-01',
-              question: 'After cutting copper tube with a tube cutter, what is the NEXT essential step before soldering?',
-              options: [
-                'Apply flux immediately and begin soldering',
-                'Ream the inside diameter to remove the burr created by the cutting wheel',
-                'Heat the tube end to anneal it before inserting into the fitting',
-                'Wipe the cut end with a damp cloth to clean it',
-              ],
-              correctIndex: 1,
-              explanation: 'Tube cutters create a sharp, inward burr on the inside diameter of the cut. This burr must be removed by reaming to restore full flow area and prevent turbulence and erosion in the system.',
-            },
-            {
-              id: 'q05-02',
-              question: 'Which cutting tool is most commonly used to cut cast iron pipe on the job site?',
-              options: [
-                'Copper tube cutter',
-                'Hacksaw',
-                'Snap cutter (chain cutter)',
-                'PEX ratchet cutter',
-              ],
-              correctIndex: 2,
-              explanation: 'The snap cutter (also called a chain cutter or soil pipe cutter) scores the outside circumference of cast iron pipe using hardened cutting wheels. When the chain is tightened with a ratchet, the pipe snaps cleanly along the score line.',
-            },
-          ],
+          practiceQuestions:  [],
         },
 
         // CHAPTER 6 — Joining Pipe (MWA B-7)
@@ -902,44 +693,7 @@ const plumberCourse = {
               ],
             },
           ],
-          practiceQuestions: [
-            {
-              id: 'q06-01',
-              question: 'Which plastic pipe type requires a SPECIFIC type of solvent cement — it CANNOT be joined with standard PVC cement?',
-              options: [
-                'ABS',
-                'CPVC',
-                'PVC',
-                'HDPE',
-              ],
-              correctIndex: 1,
-              explanation: 'CPVC (Chlorinated PVC) requires CPVC-specific solvent cement. Using standard PVC cement on CPVC is a code violation and will result in joint failure. HDPE is joined by fusion, not cement.',
-            },
-            {
-              id: 'q06-02',
-              question: 'Calculate the thermal expansion of a 10-metre PVC pipe run if the temperature increases by 30°C. (Coefficient: 0.0000594/°C)',
-              options: [
-                '0.178 mm',
-                '17.82 mm',
-                '1.782 mm',
-                '178.2 mm',
-              ],
-              correctIndex: 1,
-              explanation: 'Expansion = L × ΔT × α = 10,000 mm × 30°C × 0.0000594 = 17.82 mm. This significant movement requires expansion accommodation in the piping system design.',
-            },
-            {
-              id: 'q06-03',
-              question: 'What type of joint is used to connect cast iron no-hub pipe?',
-              options: [
-                'Threaded joint with pipe dope',
-                'Solvent cement joint',
-                'No-hub coupling with neoprene gasket and band clamp',
-                'Lead and oakum joint',
-              ],
-              correctIndex: 2,
-              explanation: 'No-hub cast iron pipe is joined with a no-hub coupling consisting of a neoprene gasket (which provides the seal) and a stainless steel band clamp with screw fasteners. This is the modern standard for cast iron DWV.',
-            },
-          ],
+          practiceQuestions:  [],
         },
       ],
     },
@@ -1020,32 +774,7 @@ const plumberCourse = {
               ],
             },
           ],
-          practiceQuestions: [
-            {
-              id: 'q07-01',
-              question: 'What is the function of a backwater valve in a sanitary drainage system?',
-              options: [
-                'To increase the flow velocity in the sewer pipe',
-                'To prevent sewage from flowing backward into the building during high municipal sewer flows',
-                'To remove air from the drainage system',
-                'To regulate the water supply pressure in the building',
-              ],
-              correctIndex: 1,
-              explanation: 'A backwater valve (check valve for gravity drainage) is designed to permit flow in one direction only. It prevents sewage from reversing direction and backing up into the building through floor drains and fixtures during surcharges in the municipal sewer.',
-            },
-            {
-              id: 'q07-02',
-              question: 'What is the purpose of a distribution box in a private septic system?',
-              options: [
-                'To hold sewage until it is collected by a pump truck',
-                'To provide access for inspection and cleaning of the sewer',
-                'To distribute effluent from the septic tank equally to each arm of the absorption field',
-                'To filter solids from the sewage before it enters the tank',
-              ],
-              correctIndex: 2,
-              explanation: 'The distribution box receives the liquid effluent from the septic tank and distributes it equally among the multiple drain trenches (arms) of the leaching/absorption field to prevent any one area from becoming overloaded.',
-            },
-          ],
+          practiceQuestions:  [],
         },
 
         // CHAPTER 8 — Interior DWV Systems (MWA C-10)
@@ -1145,56 +874,7 @@ const plumberCourse = {
               ],
             },
           ],
-          practiceQuestions: [
-            {
-              id: 'q08-01',
-              question: 'What is the primary function of venting in a DWV system?',
-              options: [
-                'To allow fresh air into the building through the plumbing',
-                'To protect trap seals from being siphoned by pressure differentials in the drainage system, and to allow air circulation',
-                'To prevent condensation from forming inside drainage pipes',
-                'To reduce the flow velocity in the drainage pipes',
-              ],
-              correctIndex: 1,
-              explanation: 'Venting allows air to enter the drainage system as waste flows, preventing negative pressure (suction) that would siphon the water out of fixture traps. A siphoned trap leaves no water seal, allowing sewer gas to enter the building.',
-            },
-            {
-              id: 'q08-02',
-              question: 'What is the standard air pressure used when performing an air test on a DWV system?',
-              options: [
-                '100 kPa (15 psi)',
-                '700 kPa (100 psi)',
-                '35 kPa (5 psi)',
-                '200 kPa (29 psi)',
-              ],
-              correctIndex: 2,
-              explanation: 'The standard air test pressure for DWV systems is 35 kPa (approximately 5 psi), held for a minimum of 15 minutes with no pressure drop. Higher pressures are not required for gravity drainage systems.',
-            },
-            {
-              id: 'q08-03',
-              question: 'Why must DWV fittings be used in drainage systems rather than pressure fittings?',
-              options: [
-                'DWV fittings are less expensive than pressure fittings',
-                'DWV fittings have long-radius sweeping curves that promote smooth flow and prevent blockages in gravity drainage',
-                'Pressure fittings are not rated for the temperatures found in drainage systems',
-                'DWV fittings are easier to install underground',
-              ],
-              correctIndex: 1,
-              explanation: 'DWV fittings have long, sweeping curves designed for smooth gravity flow. Pressure fittings have abrupt bends that would create turbulence, trap debris, and cause blockages in drainage applications.',
-            },
-            {
-              id: 'q08-04',
-              question: 'What is the purpose of a "cleanout" in a DWV system?',
-              options: [
-                'To allow the water seal in the trap to be replenished',
-                'To provide access for cleaning and inspection of the drainage piping',
-                'To allow air to enter the drainage system and protect trap seals',
-                'To allow the plumber to test the system pressure',
-              ],
-              correctIndex: 1,
-              explanation: 'Cleanouts provide access points in drainage and venting systems for cleaning blockages and conducting inspections. They are required by code at all major changes of direction, the base of stacks, and at intervals along long horizontal runs.',
-            },
-          ],
+          practiceQuestions:  [],
         },
       ],
     },
@@ -1344,44 +1024,7 @@ const plumberCourse = {
               ],
             },
           ],
-          practiceQuestions: [
-            {
-              id: 'q09-01',
-              question: 'What is a "cross connection" in a plumbing system?',
-              options: [
-                'A fitting used to connect two pipes of different diameters',
-                'Any actual or potential connection between a potable water source and a non-potable water source',
-                'The intersection of a cold water pipe and a hot water pipe at a mixing valve',
-                'A connection between the building drain and the building sewer',
-              ],
-              correctIndex: 1,
-              explanation: 'A cross connection is any actual or potential link between a potable water system and a source of contamination. If backflow occurs at a cross connection, contamination enters the drinking water supply.',
-            },
-            {
-              id: 'q09-02',
-              question: 'Which backflow preventer provides the HIGHEST level of mechanical backflow protection?',
-              options: [
-                'Atmospheric vacuum breaker (AVB)',
-                'Double check valve (DCV)',
-                'Reduced-pressure backflow preventer (RPBFP)',
-                'Pressure vacuum breaker (PVB)',
-              ],
-              correctIndex: 2,
-              explanation: 'The reduced-pressure backflow preventer (RPBFP) provides the highest level of mechanical protection and is required for high-hazard applications. It contains two independently operating check valves and a pressure differential relief valve, and must be tested annually.',
-            },
-            {
-              id: 'q09-03',
-              question: 'A pressure reducing valve (PRV) is required on a water service when the supply pressure exceeds approximately:',
-              options: [
-                '200 kPa (29 psi)',
-                '350 kPa (51 psi)',
-                '550 kPa (80 psi)',
-                '700 kPa (102 psi)',
-              ],
-              correctIndex: 2,
-              explanation: 'The National Plumbing Code of Canada limits the maximum working pressure in a potable water distribution system. A pressure reducing valve (PRV) is required when the service pressure exceeds approximately 550 kPa (80 psi) to protect fixtures and appliances.',
-            },
-          ],
+          practiceQuestions:  [],
         },
       ],
     },
@@ -1475,44 +1118,7 @@ const plumberCourse = {
               ],
             },
           ],
-          practiceQuestions: [
-            {
-              id: 'q10-01',
-              question: 'A water sample shows hardness of 180 ppm. Convert this to grains per gallon (gpg). (1 gpg = 17.12 ppm)',
-              options: [
-                '3,081.6 gpg',
-                '10.5 gpg',
-                '180 gpg',
-                '0.095 gpg',
-              ],
-              correctIndex: 1,
-              explanation: 'To convert ppm to gpg: divide by 17.12. So 180 ÷ 17.12 = 10.51 gpg. This is considered hard water and typically requires treatment with a water softener.',
-            },
-            {
-              id: 'q10-02',
-              question: 'What is the function of a Temperature and Pressure Relief (TPR) valve on a water heater?',
-              options: [
-                'To limit the maximum temperature of the hot water at fixtures',
-                'To automatically discharge water if the temperature or pressure in the water heater exceeds safe limits, preventing explosion',
-                'To balance the flow between hot and cold water supply pipes',
-                'To prevent backflow from the water heater into the cold water supply',
-              ],
-              correctIndex: 1,
-              explanation: 'The TPR valve is a critical safety device that opens automatically if the water heater exceeds safe temperature or pressure limits. Without it, an overheated water heater can build up tremendous pressure and explode. The discharge pipe must drain to a safe location.',
-            },
-            {
-              id: 'q10-03',
-              question: 'A family of 4 uses 75 gallons per day. Water hardness is 12 gpg, with 1 gpg equivalent iron. They want 7 days between softener regenerations. How many grains of capacity are required?',
-              options: [
-                '25,200 grains',
-                '27,300 grains',
-                '3,900 grains',
-                '4,200 grains',
-              ],
-              correctIndex: 0,
-              explanation: 'Grains = persons × gpd × (hardness + iron) × days = 4 × 75 × (12 + 1) × 7 = 4 × 75 × 13 × 7 = 27,300 grains... Wait, recalculating: 4 × 75 = 300 gpd; 300 × 13 = 3,900 grains/day; 3,900 × 7 = 27,300 grains. (Note: 25,200 would be without iron factor: 4 × 75 × 12 × 7 = 25,200.) The correct answer including the iron factor is 27,300.',
-            },
-          ],
+          practiceQuestions:  [],
         },
       ],
     },
@@ -1623,56 +1229,7 @@ const plumberCourse = {
               ],
             },
           ],
-          practiceQuestions: [
-            {
-              id: 'q11-01',
-              question: 'A hydronic zone requires 30,000 Btuh. The supply water temperature is 180°F and the return is 160°F. What is the required flow rate in GPM?',
-              options: [
-                '1.5 gpm',
-                '3.0 gpm',
-                '6.0 gpm',
-                '15.0 gpm',
-              ],
-              correctIndex: 1,
-              explanation: 'ΔT = 180°F − 160°F = 20°F. gpm = Btuh ÷ (500 × ΔT) = 30,000 ÷ (500 × 20) = 30,000 ÷ 10,000 = 3.0 gpm.',
-            },
-            {
-              id: 'q11-02',
-              question: 'What is the hydronic system output in Btuh if the flow rate is 5 gpm and the temperature differential is 15°F?',
-              options: [
-                '37,500 Btuh',
-                '3,750 Btuh',
-                '75,000 Btuh',
-                '1,500 Btuh',
-              ],
-              correctIndex: 0,
-              explanation: 'Btuh = gpm × 500 × ΔT = 5 × 500 × 15 = 37,500 Btuh.',
-            },
-            {
-              id: 'q11-03',
-              question: 'In a hydronic system, where should the expansion tank be connected relative to the circulator pump?',
-              options: [
-                'On the discharge side of the circulator pump',
-                'As far from the circulator pump as possible to maximize pressure distribution',
-                'At the point of no pressure change — close to the circulator pump inlet (suction side)',
-                'At the highest point in the system only',
-              ],
-              correctIndex: 2,
-              explanation: 'The expansion tank should be connected at the "point of no pressure change," which is close to the circulator pump inlet (suction side). This ensures the pump pressurizes the system rather than pushing water against the expansion tank, and maintains proper system pressure throughout.',
-            },
-            {
-              id: 'q11-04',
-              question: 'How many Btuh does a radiator rated at 10 ft² EDR produce?',
-              options: [
-                '1,200 Btuh',
-                '2,400 Btuh',
-                '4,800 Btuh',
-                '24,000 Btuh',
-              ],
-              correctIndex: 1,
-              explanation: 'The constant from the Plumber Formulas reference is: 1 ft² EDR = 240 Btuh. Therefore: 10 ft² × 240 Btuh/ft² = 2,400 Btuh.',
-            },
-          ],
+          practiceQuestions:  [],
         },
 
         // CHAPTER 12 — Specialized Systems (MWA G)
@@ -1738,32 +1295,7 @@ const plumberCourse = {
               ],
             },
           ],
-          practiceQuestions: [
-            {
-              id: 'q12-01',
-              question: 'What is the purpose of the DISS (Diameter Index Safety System) used in medical gas piping?',
-              options: [
-                'To standardize the pipe diameter used for all medical gases',
-                'To prevent cross-connection between different medical gases by ensuring only the correct fitting can connect to each gas outlet',
-                'To measure the flow rate of medical gases in the distribution system',
-                'To allow quick disconnection of medical equipment in an emergency',
-              ],
-              correctIndex: 1,
-              explanation: 'The DISS uses unique fitting dimensions for each medical gas. This makes it physically impossible to connect equipment intended for one gas (e.g., oxygen) to a different gas outlet (e.g., nitrous oxide), preventing potentially fatal errors.',
-            },
-            {
-              id: 'q12-02',
-              question: 'Why is flux NOT permitted during the brazing of medical gas piping?',
-              options: [
-                'Flux is too expensive for medical gas applications',
-                'Flux creates a residue inside the pipe that cannot be removed and would contaminate the gas supply, potentially harming patients',
-                'Flux weakens the copper tubing at high temperatures',
-                'Flux is only required for soft soldering, not brazing',
-              ],
-              correctIndex: 1,
-              explanation: 'Flux residue inside medical gas piping cannot be reliably removed and would contaminate the gas. For this reason, a nitrogen purge is used during brazing to prevent internal oxidation — eliminating the need for flux entirely. Clean, oxide-free joints are made without it.',
-            },
-          ],
+          practiceQuestions:  [],
         },
       ],
     },
@@ -1938,56 +1470,7 @@ const plumberCourse = {
               ],
             },
           ],
-          practiceQuestions: [
-            {
-              id: 'q13-01',
-              question: 'Convert 25°C to Fahrenheit using the official formula.',
-              options: [
-                '57°F',
-                '77°F',
-                '45°F',
-                '95°F',
-              ],
-              correctIndex: 1,
-              explanation: '°F = (°C × 1.8) + 32 = (25 × 1.8) + 32 = 45 + 32 = 77°F.',
-            },
-            {
-              id: 'q13-02',
-              question: 'What pressure does a water column of 23.1 feet exert in psi? (Use: 0.433 psi/ft)',
-              options: [
-                '10.0 psi',
-                '100 psi',
-                '53.4 psi',
-                '0.43 psi',
-              ],
-              correctIndex: 0,
-              explanation: 'Pressure = height × 0.433 psi/ft = 23.1 ft × 0.433 = 10.0 psi. Note: 2.31 feet of water = 1 psi (the inverse of this constant).',
-            },
-            {
-              id: 'q13-03',
-              question: 'A circular pipe has an inside radius of 75 mm. What is its cross-sectional area in mm²? (π = 3.1416)',
-              options: [
-                '17,671 mm²',
-                '471 mm²',
-                '235 mm²',
-                '70,686 mm²',
-              ],
-              correctIndex: 0,
-              explanation: 'Area = π × r² = 3.1416 × 75² = 3.1416 × 5,625 = 17,671 mm².',
-            },
-            {
-              id: 'q13-04',
-              question: 'Convert 15 L/s to GPM. (Use: 1 L/s = 13.20 gpm)',
-              options: [
-                '1.14 gpm',
-                '15 gpm',
-                '198 gpm',
-                '880 gpm',
-              ],
-              correctIndex: 2,
-              explanation: '15 L/s × 13.20 = 198 gpm. This conversion is useful when working with specifications that mix metric flow rates with imperial fixture and pipe data.',
-            },
-          ],
+          practiceQuestions:  [],
         },
 
         // CHAPTER 14 — Glossary
@@ -2052,42 +1535,18 @@ const plumberCourse = {
               ],
             },
           ],
-          practiceQuestions: [
-            {
-              id: 'q14-01',
-              question: 'What is the difference between "tube" and "tubing" in the plumbing trade?',
-              options: [
-                'There is no difference — the terms are interchangeable',
-                'Tube is measured by its inside diameter (ID); tubing is measured by its outside diameter (OD) and wall thickness',
-                'Tube is plastic; tubing is metal',
-                'Tube is for DWV; tubing is for water distribution',
-              ],
-              correctIndex: 1,
-              explanation: 'This distinction matters for ordering and fitting selection. Copper tube (Type K, L, M) is sized by nominal inside diameter. Copper tubing (ACR) is sized by actual outside diameter. Confusion between these can result in fitting incompatibilities.',
-            },
-            {
-              id: 'q14-02',
-              question: 'What is "dielectric protection" in the context of pipe installation?',
-              options: [
-                'Protection of pipes from high-voltage electrical hazards',
-                'Isolation of dissimilar metals to prevent electrolysis (ion transfer) and galvanic corrosion',
-                'A type of pipe insulation to prevent condensation',
-                'The process of testing pipe joints with electrical current',
-              ],
-              correctIndex: 1,
-              explanation: 'Dielectric protection prevents galvanic corrosion that occurs when dissimilar metals (e.g., copper and steel) are in direct contact in the presence of an electrolyte (water). Dielectric unions, couplings, and fittings create an electrical barrier between the metals.',
-            },
-          ],
+          practiceQuestions:  [],
         },
 
-        // CHAPTER 15 — Mock Exam and Strategy
+        // CHAPTER 15 — Full Mock Exam and Exam Strategy
         {
           id: 'ch-15',
           number: 15,
           title: 'Red Seal Mock Exam and Exam Strategy',
-          subtitle: 'Practice questions distributed across all 7 Major Work Activities, plus tips for exam success',
+          subtitle: '125-question timed practice exam (3 hours 45 min), plus tips for exam success',
           isFree: false,
           estimatedMinutes: 90,
+          isMockExam: true,
           sections: [
             {
               id: 'ch15-s1',
@@ -2095,7 +1554,7 @@ const plumberCourse = {
               content: [
                 {
                   type: 'paragraph',
-                  text: 'The Plumber Red Seal Interprovincial Examination consists of 125 multiple-choice questions. The exam is based on the Red Seal Occupational Standard (RSOS) and tests knowledge across all seven Major Work Activities (MWAs). The time allowed is typically 3 hours.',
+                  text: 'The Plumber Red Seal Interprovincial Examination consists of 125 multiple-choice questions. The exam is based on the Red Seal Occupational Standard (RSOS) and tests knowledge across all seven Major Work Activities (MWAs). The time allowed is 3 hours 45 minutes. Use the "Start exam" button above to launch the full timed mock exam simulation.',
                 },
                 {
                   type: 'table',
@@ -2127,128 +1586,7 @@ const plumberCourse = {
               ],
             },
           ],
-          practiceQuestions: [
-            {
-              id: 'q15-01',
-              question: 'Which MWA represents the LARGEST portion of the Red Seal Plumber examination?',
-              options: [
-                'MWA A — Common Occupational Skills (11%)',
-                'MWA C — DWV Systems (26%)',
-                'MWA D — Water Service and Distribution (19%)',
-                'MWA F — Hydronic Systems (13%)',
-              ],
-              correctIndex: 1,
-              explanation: 'MWA C (DWV Systems) is weighted at 26% of the 125-question exam — approximately 33 questions. DWV is the largest single area and deserves the most focused study time.',
-            },
-            {
-              id: 'q15-02',
-              question: 'A plumber needs to convert a flow rate of 3 L/s to GPM. Using the conversion factor 1 L/s = 13.20 gpm, what is the result?',
-              options: [
-                '0.23 gpm',
-                '3.96 gpm',
-                '39.6 gpm',
-                '396 gpm',
-              ],
-              correctIndex: 2,
-              explanation: '3 L/s × 13.20 gpm per L/s = 39.6 gpm.',
-            },
-            {
-              id: 'q15-03',
-              question: 'What type of venting is required where conditions prevent installation of a conventional vent through the roof?',
-              options: [
-                'Air admittance valve (AAV) — a mechanical vent that opens to admit air but prevents sewer gas escape',
-                'The drainage pipe must be eliminated from the design',
-                'A larger drain pipe can be substituted',
-                'No venting is required if the drain is under 50 mm',
-              ],
-              correctIndex: 0,
-              explanation: 'An air admittance valve (AAV) — also called an automatic air vent — opens under negative pressure to admit air into the drainage system and closes against positive pressure to prevent gas escape. Permitted by code in specific applications where conventional venting is impractical.',
-            },
-            {
-              id: 'q15-04',
-              question: 'What is the formula for calculating force on a pipe fitting or valve?',
-              options: [
-                'F = Mass × Acceleration',
-                'F = P × A (pressure × area)',
-                'F = H × density',
-                'F = L × ΔT × α',
-              ],
-              correctIndex: 1,
-              explanation: 'Force = Pressure × Area (P × A). This is used to calculate thrust forces on fittings, valves, and end caps in pressurized piping systems. Thrust blocks are designed to resist these forces in buried piping.',
-            },
-            {
-              id: 'q15-05',
-              question: 'A plumber is installing a private sewage treatment system. What is the function of the septic tank?',
-              options: [
-                'To pump sewage up to the absorption field',
-                'To provide final treatment and disinfection of sewage before disposal',
-                'To provide anaerobic digestion of solids and separate solids from liquid effluent for distribution to the absorption field',
-                'To store sewage for periodic collection by a pump truck',
-              ],
-              correctIndex: 2,
-              explanation: 'The septic tank provides primary treatment through anaerobic (without oxygen) digestion. Solids settle to the bottom as sludge, a scum layer floats on top, and the clarified liquid effluent in the middle drains to the distribution box and absorption field.',
-            },
-            {
-              id: 'q15-06',
-              question: 'Boyle\'s Law states V₁/V₂ = P₂/P₁. If a gas occupies 4 L at 200 kPa, what volume will it occupy at 400 kPa? (Assume constant temperature.)',
-              options: [
-                '8 L',
-                '2 L',
-                '1 L',
-                '0.5 L',
-              ],
-              correctIndex: 1,
-              explanation: 'V₁/V₂ = P₂/P₁ → 4/V₂ = 400/200 → 4/V₂ = 2 → V₂ = 4/2 = 2 L. As pressure doubles, volume halves (at constant temperature). This is fundamental to understanding compressed gas systems and pressure testing.',
-            },
-            {
-              id: 'q15-07',
-              question: 'What is the maximum flush volume allowed for a water closet (toilet) under the National Plumbing Code of Canada?',
-              options: [
-                '6 litres',
-                '13 litres',
-                '19 litres',
-                '1.6 gallons',
-              ],
-              correctIndex: 0,
-              explanation: 'The National Plumbing Code of Canada limits flush volumes to a maximum of 6 litres per flush for water closets. High-efficiency toilets (HETs) use 4.8 litres or less. This was reduced from earlier limits of 13 L and 19 L to conserve water.',
-            },
-            {
-              id: 'q15-08',
-              question: 'A zone in a hydronic system has a flow rate of 4 gpm and a temperature differential of 25°F. What is the heat output in Btuh?',
-              options: [
-                '12,500 Btuh',
-                '50,000 Btuh',
-                '8,000 Btuh',
-                '2,000 Btuh',
-              ],
-              correctIndex: 1,
-              explanation: 'Btuh = gpm × 500 × ΔT = 4 × 500 × 25 = 50,000 Btuh.',
-            },
-            {
-              id: 'q15-09',
-              question: 'The National Plumbing Code (NPC) requires that all fixtures be individually trapped. What is the purpose of the trap?',
-              options: [
-                'To prevent freezing of drain pipes in cold climates',
-                'To hold a liquid seal that prevents the passage of sewer gas into the building',
-                'To reduce water pressure at the fixture outlet',
-                'To prevent backflow of hot water from the water heater',
-              ],
-              correctIndex: 1,
-              explanation: 'A trap holds a liquid (water) seal in a curved section of pipe. This seal prevents toxic and odorous sewer gases from entering the building while still allowing liquid waste to flow through by gravity.',
-            },
-            {
-              id: 'q15-10',
-              question: 'Calculate the thermal expansion of a 15-metre copper pipe run if temperature increases from 10°C to 60°C. (Coefficient for copper: 0.0000171 per 1°C)',
-              options: [
-                '2.6 mm',
-                '12.8 mm',
-                '1.28 mm',
-                '25.6 mm',
-              ],
-              correctIndex: 1,
-              explanation: 'ΔT = 60°C − 10°C = 50°C. Expansion = L × ΔT × α = 15,000 mm × 50°C × 0.0000171 = 12.825 mm ≈ 12.8 mm. This expansion must be accommodated with pipe anchors, guides, and expansion loops or devices.',
-            },
-          ],
+          practiceQuestions:  [],
         },
       ],
     },
@@ -2260,7 +1598,7 @@ const plumberCourse = {
 const _parts = plumberCourse.parts;
 const _allChapters = _parts.flatMap((p) => p.chapters);
 const _totalChapters = _allChapters.length;
-const _totalQuestions = _allChapters.reduce((sum, ch) => sum + (ch.practiceQuestions?.length || 0), 0);
+const _totalQuestions = 54; // Questions moved to server/scripts/seedPracticeQuestions.js (practice API)
 
 export const plumberCourseData = {
   id: 'plumber-306a',

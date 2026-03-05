@@ -45,7 +45,12 @@ export default function PracticeQuestion({
     setIsCorrect(correct);
     setShowExplanation(true);
 
-    // Save answer to database
+    // Practice mode: notify parent for progress/session tracking
+    if (onAnswerSave && actualQuestionId) {
+      onAnswerSave(actualQuestionId, { selectedIndex: index, isCorrect: correct });
+    }
+
+    // Save answer to database (course mode)
     if (courseId && chapterId && actualQuestionId) {
       try {
         await api.post('/answers', {
@@ -55,10 +60,6 @@ export default function PracticeQuestion({
           selectedIndex: index,
           isCorrect: correct,
         });
-        
-        if (onAnswerSave) {
-          onAnswerSave(actualQuestionId, { selectedIndex: index, isCorrect: correct });
-        }
       } catch (error) {
         console.error('Failed to save answer:', error);
         // Don't show error to user - answer is still visible locally

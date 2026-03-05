@@ -195,6 +195,19 @@ export function getTradesPageSEO() {
   };
 }
 
+/** SEO for trade guide page (/trades/:slug-red-seal). Pass trade object from TRADE_DATA (name, overviewShort, slug, tradeCode). */
+export function getTradeGuidePageSEO(trade) {
+  if (!trade || !trade.name) return null;
+  return {
+    title: `${trade.name} Red Seal Exam Guide — ${trade.tradeCode} Study & Practice`,
+    description: trade.overviewShort
+      ? `${trade.overviewShort} Red Seal exam format: ${trade.examQuestions} questions, ${trade.examDuration}, ${trade.passingScore}% to pass. Free sample questions and study strategy.`
+      : `${trade.name} Red Seal exam guide. Format, major work activities, sample questions, and study tips.`,
+    keywords: `${trade.name}, Red Seal, ${trade.tradeCode}, exam guide, study guide, practice questions, Canadian trades, certification`,
+    canonical: `/trades/${trade.slug}-red-seal`,
+  };
+}
+
 /** SEO for /trades/:tradeSlug — trade exam page. Pass course and tradeSlug. */
 export function getTradeExamPageSEO(course, tradeSlug) {
   if (!course || !tradeSlug) return null;
@@ -224,6 +237,16 @@ export function getPracticeTestsListSEO() {
     description: 'Try free Red Seal practice questions for Hairstylist, Plumber, Construction Electrician, and more. No sign-up required. Get a feel for the real exam before you buy full prep.',
     keywords: 'Red Seal practice test, free practice questions, exam prep by trade, Canadian trades practice',
     canonical: '/practice-tests',
+  };
+}
+
+/** SEO for free practice landing pages: /electrician-red-seal-practice-questions, /plumber-red-seal-practice-questions, etc. */
+export function getFreePracticeLandingSEO({ tradeName, tradeCode, tradeSlug, landingPath, questionCount = 20 }) {
+  return {
+    title: `Free ${tradeName} Red Seal Practice Questions`,
+    description: `Try ${questionCount} free ${tradeName} Red Seal exam practice questions with instant feedback and explanations. No sign-up required. Based on the official ${tradeCode} standard. Prepare for your certification exam.`,
+    keywords: `${tradeName}, Red Seal, practice questions, free, ${tradeCode}, exam prep, Canadian trades, Red Seal practice test`,
+    canonical: landingPath,
   };
 }
 

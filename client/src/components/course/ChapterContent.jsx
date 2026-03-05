@@ -1,11 +1,17 @@
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useAuth } from '../../context/AuthContext';
+import { getGuideSlugFromCourseSlug } from '../../data/tradeGuides';
+import { getTradeBySlug } from '../../data/tradeGuideContent';
+import { paths } from '../../utils/routes';
 import KeyTermCard from './KeyTermCard';
 import InfoBox from './InfoBox';
 import ComparisonTable from './ComparisonTable';
 import PracticeQuestion from './PracticeQuestion';
 import Badge from '../ui/Badge';
+import Button from '../ui/Button';
+import Card from '../ui/Card';
 import api from '../../utils/api';
 
 export default function ChapterContent({ course, chapter, onQuestionComplete }) {
@@ -108,6 +114,28 @@ export default function ChapterContent({ course, chapter, onQuestionComplete }) 
           </Badge>
         )}
       </div>
+
+      {/* Full Mock Exam simulation CTA */}
+      {chapter.isMockExam && course?.id && (() => {
+        const tradeSlug = getGuideSlugFromCourseSlug(course.id);
+        const trade = getTradeBySlug(tradeSlug);
+        if (!trade) return null;
+        return (
+          <div className="mb-8">
+            <Card className="p-6 border-2 border-accent/30 bg-accent/5">
+              <h2 className="text-xl font-display font-semibold text-text-primary mb-2">
+                {t('mockExam.title')}
+              </h2>
+              <p className="text-text-muted mb-4">
+                {t('mockExam.instructionQuestions', { count: trade.examQuestions })} · {t('mockExam.instructionTime', { duration: trade.examDuration })} · {t('mockExam.instructionPassing', { percent: trade.passingScore })}
+              </p>
+              <Link to={paths.mockExam(tradeSlug)}>
+                <Button size="lg">{t('mockExam.startExam')}</Button>
+              </Link>
+            </Card>
+          </div>
+        );
+      })()}
 
       {/* Sections */}
       {chapter.sections && chapter.sections.map((section) => (

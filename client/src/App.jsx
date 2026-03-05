@@ -16,6 +16,7 @@ import HomePage from './pages/HomePage';
 
 const RedSealExamPage = lazy(() => import('./pages/RedSealExamPage'));
 const TradesPage = lazy(() => import('./pages/TradesPage'));
+const TradePageRoute = lazy(() => import('./components/routing/TradePageRoute'));
 const TradeExamPage = lazy(() => import('./pages/TradeExamPage'));
 const PracticeTestsListPage = lazy(() => import('./pages/PracticeTestsListPage'));
 const GuidesSlugPage = lazy(() => import('./pages/GuidesSlugPage'));
@@ -28,6 +29,8 @@ const LearnPage = lazy(() => import('./pages/LearnPage'));
 const GuidesPage = lazy(() => import('./pages/GuidesPage'));
 const TradeGuidePage = lazy(() => import('./pages/TradeGuidePage'));
 const PracticePage = lazy(() => import('./pages/PracticePage'));
+const MockExamPage = lazy(() => import('./pages/MockExamPage'));
+const FreePracticeQuestionsLandingPage = lazy(() => import('./pages/FreePracticeQuestionsLandingPage'));
 const LoginPage = lazy(() => import('./pages/LoginPage'));
 const RegisterPage = lazy(() => import('./pages/RegisterPage'));
 const DashboardPage = lazy(() => import('./pages/DashboardPage'));
@@ -71,9 +74,13 @@ export default function App() {
             <Route path="/" element={<HomePage />} />
             <Route path="/red-seal-exam" element={<RedSealExamPage />} />
             <Route path="/trades" element={<TradesPage />} />
-            <Route path="/trades/:tradeSlug" element={<TradeExamPage />} />
+            <Route path="/trades/:tradeSlug" element={<TradePageRoute />} />
             <Route path="/practice-tests" element={<PracticeTestsListPage />} />
+            <Route path="/practice-tests/:tradeSlug/mock-exam" element={<MockExamPage />} />
             <Route path="/practice-tests/:tradeSlug" element={<PracticePage />} />
+            <Route path="/electrician-red-seal-practice-questions" element={<FreePracticeQuestionsLandingPage />} />
+            <Route path="/plumber-red-seal-practice-questions" element={<FreePracticeQuestionsLandingPage />} />
+            <Route path="/hairstylist-red-seal-practice-questions" element={<FreePracticeQuestionsLandingPage />} />
             <Route path="/guides" element={<GuidesPage />} />
             <Route path="/guides/:slug" element={<GuidesSlugPage />} />
             <Route path="/tools/red-seal-readiness-test" element={<RedSealReadinessTestPage />} />

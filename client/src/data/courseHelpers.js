@@ -35,7 +35,8 @@ export function getAdjacentChapters(chapterId, course) {
   };
 }
 
-/** Count total practice questions across all chapters */
+/** Count total practice questions across all chapters (or course.totalQuestions when questions live in API) */
 export function getTotalQuestions(course) {
-  return getAllChapters(course).reduce((sum, ch) => sum + (ch.practiceQuestions?.length || 0), 0);
+  const fromChapters = getAllChapters(course).reduce((sum, ch) => sum + (ch.practiceQuestions?.length || 0), 0);
+  return fromChapters > 0 ? fromChapters : (course?.totalQuestions ?? 0);
 }

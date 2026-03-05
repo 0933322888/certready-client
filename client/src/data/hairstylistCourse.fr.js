@@ -1786,9 +1786,10 @@ export const hairstylistCourse = {
                   id: 'ch-13',
                   number: 13,
                   title: 'Examen blanc complet',
-                  subtitle: 'Examen blanc chronométré de 50 questions couvrant les 17 sujets d\'examen officiels',
+                  subtitle: 'Examen blanc chronométré de 120 questions couvrant les 17 sujets d\'examen officiels',
                   isFree: false,
                   estimatedMinutes: 60,
+                  isMockExam: true,
                   sections: [
                       {
                           id: 's13-1',

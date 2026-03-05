@@ -2052,6 +2052,7 @@ const plumberCourseFR = {
             subtitle: 'Questions pratiques couvrant les 7 Grandes tâches de l\'apprentissage, avec conseils pour réussir l\'examen',
             isFree: false,
             estimatedMinutes: 90,
+            isMockExam: true,
             sections: [
               {
                 id: 'ch15-s1',
