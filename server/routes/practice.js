@@ -8,6 +8,7 @@ const router = express.Router();
 /** tradeSlug (URL) → course slug for purchase check */
 const TRADE_SLUG_TO_COURSE_SLUG = {
   'construction-electrician': 'construction-electrician-309a',
+  carpenter: 'carpenter-403a',
   plumber: 'plumber-306a',
   hairstylist: 'hairstylist-332a',
 };
@@ -15,6 +16,7 @@ const TRADE_SLUG_TO_COURSE_SLUG = {
 /** Full mock exam question count per trade (for readiness 20% calculation) */
 const EXAM_QUESTIONS_BY_TRADE = {
   'construction-electrician': 100,
+  carpenter: 100,
   plumber: 125,
   hairstylist: 120,
 };

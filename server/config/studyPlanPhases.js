@@ -9,6 +9,12 @@ export const STUDY_PLAN_PHASES = {
     { title: 'Wiring, lighting, and controls', key: 'wiring-controls' },
     { title: 'Practice exams and review', key: 'practice-exams' },
   ],
+  'carpenter-403a': [
+    { title: 'Foundations, safety, and layout', key: 'foundations-layout' },
+    { title: 'Concrete and framing', key: 'concrete-framing' },
+    { title: 'Exterior and interior finishing', key: 'finishing' },
+    { title: 'Renovations and practice exams', key: 'practice-exams' },
+  ],
   'plumber-306a': [
     { title: 'Safety and fundamentals', key: 'safety-fundamentals' },
     { title: 'Pipe preparation and joining', key: 'pipe-joining' },
