@@ -5,6 +5,7 @@ import { protect } from '../middleware/auth.js';
 import {
   STUDY_PLAN_PHASES,
   STUDY_PLAN_COURSE_SLUGS,
+  DEFAULT_STUDY_PLAN_PHASES,
   DAYS_FOR_DAILY_PLAN,
 } from '../config/studyPlanPhases.js';
 
@@ -22,6 +23,15 @@ function startOfDay(date) {
   const d = new Date(date);
   d.setHours(0, 0, 0, 0);
   return d;
+}
+
+/** Parse HTML date input (YYYY-MM-DD) as local calendar day to avoid UTC off-by-one. */
+function parseExamDate(examDate) {
+  if (typeof examDate === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(examDate.trim())) {
+    const [y, m, d] = examDate.trim().split('-').map(Number);
+    return startOfDay(new Date(y, m - 1, d));
+  }
+  return startOfDay(new Date(examDate));
 }
 
 /**
@@ -104,13 +114,40 @@ router.get('/', async (req, res) => {
 // @access  Private
 router.get('/courses', async (req, res) => {
   try {
-    const courses = await Course.find({
+    const configured = await Course.find({
       slug: { $in: STUDY_PLAN_COURSE_SLUGS },
       isPublished: true,
     })
       .select('slug title')
       .lean();
-    res.json(courses);
+
+    // Include any other published courses (they use default phases)
+    const extras = await Course.find({
+      slug: { $nin: STUDY_PLAN_COURSE_SLUGS },
+      isPublished: true,
+    })
+      .select('slug title')
+      .lean();
+
+    const bySlug = new Map();
+    for (const c of [...configured, ...extras]) {
+      bySlug.set(c.slug, c);
+    }
+
+    // Prefer configured order, then extras
+    const ordered = [
+      ...STUDY_PLAN_COURSE_SLUGS.map((slug) => bySlug.get(slug)).filter(Boolean),
+      ...extras.filter((c) => !STUDY_PLAN_COURSE_SLUGS.includes(c.slug)),
+    ];
+
+    // If DB has no matching courses yet, still return configured slugs so UI works
+    if (!ordered.length) {
+      return res.json(
+        STUDY_PLAN_COURSE_SLUGS.map((slug) => ({ slug, title: slug }))
+      );
+    }
+
+    res.json(ordered);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
@@ -121,15 +158,22 @@ router.get('/courses', async (req, res) => {
 // @access  Private
 router.post('/', async (req, res) => {
   try {
-    const { courseSlug, examDate } = req.body;
+    const courseSlug = typeof req.body.courseSlug === 'string' ? req.body.courseSlug.trim() : '';
+    const { examDate } = req.body;
     if (!courseSlug || !examDate) {
       return res.status(400).json({ message: 'courseSlug and examDate are required' });
     }
-    const phases = STUDY_PLAN_PHASES[courseSlug];
+
+    const course = await Course.findOne({ slug: courseSlug, isPublished: true }).select('title slug').lean();
+    const phases = STUDY_PLAN_PHASES[courseSlug] || (course ? DEFAULT_STUDY_PLAN_PHASES : null);
     if (!phases || !phases.length) {
-      return res.status(400).json({ message: 'Invalid course for study plan' });
+      return res.status(400).json({
+        message: 'Invalid course for study plan',
+        supportedCourses: STUDY_PLAN_COURSE_SLUGS,
+      });
     }
-    const exam = new Date(examDate);
+
+    const exam = parseExamDate(examDate);
     const today = startOfDay(new Date());
     if (exam <= today) {
       return res.status(400).json({ message: 'Exam date must be in the future' });
@@ -140,7 +184,6 @@ router.post('/', async (req, res) => {
     if (!items.length) {
       return res.status(400).json({ message: 'Could not generate plan' });
     }
-    const course = await Course.findOne({ slug: courseSlug, isPublished: true }).select('title').lean();
     const plan = await StudyPlan.create({
       user: req.user._id,
       courseSlug,

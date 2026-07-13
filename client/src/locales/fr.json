@@ -240,6 +240,8 @@
       "examDate": "Date de l'examen",
       "generate": "Générer le plan",
       "generating": "Génération…",
+      "generated": "Plan d'étude créé",
+      "generateFailed": "Échec de la création du plan d'étude",
       "noPlan": "Aucun plan d'étude. Choisissez un métier et une date d'examen pour en générer un.",
       "examOn": "Examen le",
       "planTypeWeekly": "Plan hebdomadaire",

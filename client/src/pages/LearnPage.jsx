@@ -39,36 +39,6 @@ export default function LearnPage() {
     user?.purchases?.some((p) => p && p.slug === slug) || pricing?.ownsCourse
   );
 
-  // Auto-claim free-window access so new members unlock content without a separate checkout click
-  useEffect(() => {
-    if (authLoading || !user || !slug || !pricing || userHasAccess) return;
-    if (!pricing.isFreeWindowActive) return;
-
-    let cancelled = false;
-
-    (async () => {
-      try {
-        const res = await api.post('/payments/create-checkout-session', { courseSlug: slug });
-        if (cancelled) return;
-        if (res.data?.isFree || res.data?.sessionId?.startsWith('free_')) {
-          await refreshUser();
-          return;
-        }
-        if (res.data?.url) {
-          window.location.href = res.data.url;
-        }
-      } catch (err) {
-        if (cancelled) return;
-        // Already owned (or race): refresh so access unlocks
-        if (err.response?.status === 400) {
-          await refreshUser();
-        }
-      }
-    })();
-
-    return () => { cancelled = true; };
-  }, [authLoading, user, slug, pricing, userHasAccess, refreshUser]);
-
   useEffect(() => {
     if (!course) {
       navigate('/');

@@ -11,6 +11,7 @@ import Badge from '../components/ui/Badge';
 import ProgressBar from '../components/ui/ProgressBar';
 import Spinner from '../components/ui/Spinner';
 import api from '../utils/api';
+import toast from 'react-hot-toast';
 
 export default function DashboardPage() {
   const { t, i18n } = useTranslation();
@@ -23,6 +24,7 @@ export default function DashboardPage() {
   const [studyPlanExamDate, setStudyPlanExamDate] = useState('');
   const [generating, setGenerating] = useState(false);
   const [togglingId, setTogglingId] = useState(null);
+  const [studyPlanCourses, setStudyPlanCourses] = useState([]);
 
   useEffect(() => {
     if (user) {
@@ -46,8 +48,36 @@ export default function DashboardPage() {
           );
         })
         .catch(() => {});
+
+      api.get('/users/study-plans/courses')
+        .then(res => {
+          const fromApi = res.data || [];
+          if (fromApi.length) {
+            setStudyPlanCourses(
+              fromApi.map((c) => ({
+                slug: c.slug,
+                title: getCourse(c.slug, i18n.language)?.title || c.title || c.slug,
+              }))
+            );
+          } else {
+            setStudyPlanCourses(
+              COURSE_SLUGS.map((slug) => ({
+                slug,
+                title: getCourse(slug, i18n.language)?.title || slug,
+              })).filter((c) => c.title)
+            );
+          }
+        })
+        .catch(() => {
+          setStudyPlanCourses(
+            COURSE_SLUGS.map((slug) => ({
+              slug,
+              title: getCourse(slug, i18n.language)?.title || slug,
+            })).filter((c) => c.title)
+          );
+        });
     }
-  }, [user]);
+  }, [user, i18n.language]);
 
   const handleGeneratePlan = (e) => {
     e.preventDefault();
@@ -62,10 +92,11 @@ export default function DashboardPage() {
         setSelectedPlan(res.data);
         setStudyPlanExamDate('');
         setGenerating(false);
+        toast.success(t('dashboard.studyPlan.generated'));
       })
       .catch(err => {
         setGenerating(false);
-        alert(err.response?.data?.message || 'Failed to generate plan');
+        toast.error(err.response?.data?.message || t('dashboard.studyPlan.generateFailed'));
       });
   };
 
@@ -108,11 +139,6 @@ export default function DashboardPage() {
   const purchasedCourses = purchasedSlugs
     .map((slug) => getCourse(slug, i18n.language))
     .filter(Boolean);
-
-  const studyPlanCourses = COURSE_SLUGS.map(slug => ({
-    slug,
-    title: getCourse(slug, i18n.language)?.title || slug,
-  })).filter(c => c.title);
 
   if (authLoading || loading) {
     return (

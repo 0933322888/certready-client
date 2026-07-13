@@ -1,6 +1,7 @@
 /**
  * Study plan phases per course (trade).
  * Used to generate weekly/daily plans: each phase becomes one or more weeks/days.
+ * Keys must match client COURSE_SLUGS / Course.slug in MongoDB.
  */
 export const STUDY_PLAN_PHASES = {
   'construction-electrician-309a': [
@@ -27,7 +28,27 @@ export const STUDY_PLAN_PHASES = {
     { title: 'Chemical services', key: 'chemical' },
     { title: 'Practice exams and exam strategy', key: 'practice-exams' },
   ],
+  'refrigeration-air-conditioning-mechanic-313a': [
+    { title: 'Safety and common occupational skills', key: 'safety-fundamentals' },
+    { title: 'Routine trade activities and planning', key: 'routine-planning' },
+    { title: 'Installation and commissioning', key: 'installation' },
+    { title: 'Maintenance, service, and practice exams', key: 'practice-exams' },
+  ],
+  'welder-456a': [
+    { title: 'Safety and common occupational skills', key: 'safety-fundamentals' },
+    { title: 'Fabricating activities', key: 'fabricating' },
+    { title: 'Thermal cutting, gouging, and welding', key: 'cutting-welding' },
+    { title: 'Practice exams and review', key: 'practice-exams' },
+  ],
 };
+
+/** Fallback when a published course has no trade-specific phases yet */
+export const DEFAULT_STUDY_PLAN_PHASES = [
+  { title: 'Foundations and safety', key: 'foundations' },
+  { title: 'Core skills and systems', key: 'core' },
+  { title: 'Advanced topics', key: 'advanced' },
+  { title: 'Practice exams and review', key: 'practice-exams' },
+];
 
 /** Course slugs that support study plans (must match COURSE_SLUGS on client) */
 export const STUDY_PLAN_COURSE_SLUGS = Object.keys(STUDY_PLAN_PHASES);

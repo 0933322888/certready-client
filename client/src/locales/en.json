@@ -189,6 +189,8 @@
       "examDate": "Exam date",
       "generate": "Generate plan",
       "generating": "Generating…",
+      "generated": "Study plan created",
+      "generateFailed": "Failed to generate study plan",
       "noPlan": "No study plan yet. Select a trade and exam date to generate one.",
       "examOn": "Exam on",
       "planTypeWeekly": "Weekly plan",
