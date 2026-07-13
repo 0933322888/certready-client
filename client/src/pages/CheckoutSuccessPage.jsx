@@ -13,7 +13,7 @@ export default function CheckoutSuccessPage() {
   const { t } = useTranslation();
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
-  const { dispatch } = useAuth();
+  const { refreshUser } = useAuth();
   const [loading, setLoading] = useState(true);
   const [purchase, setPurchase] = useState(null);
   const hasVerified = useRef(false);
@@ -48,13 +48,7 @@ export default function CheckoutSuccessPage() {
             setPurchase(res.data.purchase);
             setLoading(false);
             toast.success('Purchase confirmed! You now have full access.');
-            api.get('/auth/me')
-              .then(meRes => {
-                if (isMounted) {
-                  dispatch({ type: 'SET_USER', payload: meRes.data });
-                }
-              })
-              .catch(console.error);
+            refreshUser().catch(console.error);
           }
           return;
         }
@@ -87,7 +81,7 @@ export default function CheckoutSuccessPage() {
       hasVerified.current = false; // Allow remount (e.g. Strict Mode) to verify again
       if (retryTimeout) clearTimeout(retryTimeout);
     };
-  }, [searchParams, navigate, dispatch]);
+  }, [searchParams, navigate, refreshUser]);
 
   if (loading) {
     return (

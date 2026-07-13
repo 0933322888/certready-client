@@ -6,11 +6,11 @@ import { getProgress } from '../../utils/progress';
 import Badge from '../ui/Badge';
 import ProgressBar from '../ui/ProgressBar';
 
-export default function ChapterSidebar({ course, currentChapterId, onChapterSelect, onClose = null }) {
+export default function ChapterSidebar({ course, currentChapterId, onChapterSelect, onClose = null, hasAccess: hasAccessProp }) {
   const { t } = useTranslation();
   const [expandedParts, setExpandedParts] = useState(new Set(course.parts.map(p => p.id)));
   const { hasPurchasedBySlug } = useAuth();
-  const hasAccess = hasPurchasedBySlug(course.slug);
+  const hasAccess = hasAccessProp ?? hasPurchasedBySlug(course.slug);
   const progress = getProgress(course.id);
   const allChapters = getAllChapters(course);
   const completedCount = progress.completed.length;

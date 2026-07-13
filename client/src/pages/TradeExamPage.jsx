@@ -23,7 +23,7 @@ export default function TradeExamPage() {
   const { tradeSlug } = useParams();
   const navigate = useNavigate();
   const { t, i18n } = useTranslation();
-  const { user, hasPurchasedBySlug, loading: authLoading } = useAuth();
+  const { user, hasPurchasedBySlug, loading: authLoading, refreshUser } = useAuth();
   const [purchasing, setPurchasing] = useState(false);
   const [promoCode, setPromoCode] = useState('');
   const [appliedPromo, setAppliedPromo] = useState(null);
@@ -35,12 +35,19 @@ export default function TradeExamPage() {
   const { pricing, loading: pricingLoading } = useCoursePricingBySlug(slug);
 
   const allChapters = course ? getAllChapters(course) : [];
-  const hasPurchased = slug ? hasPurchasedBySlug(slug) : false;
+  const hasPurchased = slug
+    ? (hasPurchasedBySlug(slug) || Boolean(pricing?.ownsCourse))
+    : false;
 
   const currentPrice = pricing?.currentPrice ?? course?.price;
   const fullPrice = pricing?.fullPrice ?? course?.price;
   const currency = pricing?.currency ?? course?.currency ?? 'CAD';
-  const displayPrice = appliedPromo ? appliedPromo.amountCents : (course?.price ?? fullPrice);
+  const isFreeOffer = Boolean(
+    appliedPromo?.amountCents === 0 || (!appliedPromo && pricing?.isFreeWindowActive)
+  );
+  const displayPrice = appliedPromo
+    ? appliedPromo.amountCents
+    : (currentPrice ?? course?.price ?? fullPrice);
   const displayCurrency = appliedPromo ? appliedPromo.currency : currency;
 
   const handleApplyPromo = async () => {
@@ -82,14 +89,25 @@ export default function TradeExamPage() {
         courseSlug: slug,
         promoCode: appliedPromo?.code || undefined,
       });
+      if (res.data?.isFree || res.data?.sessionId?.startsWith('free_')) {
+        await refreshUser();
+        toast.success(t('checkout.successTitle'));
+        navigate(paths.learn(slug));
+        return;
+      }
       if (res.data?.url) {
         window.location.href = res.data.url;
         return;
       }
     } catch (err) {
-      toast.error(err.response?.data?.message || t('course.checkoutFailed'));
-      setPurchasing(false);
+      if (err.response?.status === 400) {
+        await refreshUser();
+        navigate(paths.learn(slug));
+      } else {
+        toast.error(err.response?.data?.message || t('course.checkoutFailed'));
+      }
     }
+    setPurchasing(false);
   };
 
   if (!guide || !course) {
@@ -210,16 +228,20 @@ export default function TradeExamPage() {
               <div className="text-4xl font-display font-bold text-accent mb-2">
                 {formatPrice(displayPrice, displayCurrency)}
               </div>
-              {appliedPromo && (
+              {(appliedPromo || pricing?.isFreeWindowActive) && (
                 <p className="text-sm text-accent-warm font-medium mb-2">
-                  {appliedPromo.amountCents === 0 ? t('course.promoAppliedFree') : t('course.promoApplied')}
+                  {isFreeOffer
+                    ? (appliedPromo ? t('course.promoAppliedFree') : t('course.freeWindowOffer'))
+                    : t('course.promoApplied')}
                 </p>
               )}
-              <p className="text-text-muted">{t('course.oneTime')}</p>
-              <p className="text-sm mt-2 text-accent-warm font-medium">{t('course.promoCodeHint')}</p>
+              <p className="text-text-muted">{isFreeOffer ? t('course.freeWindowOneTime') : t('course.oneTime')}</p>
+              {!isFreeOffer && (
+                <p className="text-sm mt-2 text-accent-warm font-medium">{t('course.promoCodeHint')}</p>
+              )}
             </div>
 
-            {!hasPurchased && user && (
+            {!hasPurchased && user && !isFreeOffer && (
               <div className="mb-4">
                 <label htmlFor="promo-code" className="block text-sm font-medium text-text-primary mb-1">
                   {t('course.promoCodeLabel')}
@@ -259,7 +281,11 @@ export default function TradeExamPage() {
                 onClick={handlePurchase}
                 disabled={purchasing}
               >
-                {purchasing ? t('course.processing') : t('course.purchase', { price: formatPrice(displayPrice, displayCurrency) })}
+                {purchasing
+                  ? t('course.processing')
+                  : isFreeOffer
+                    ? t('course.claimFreeAccess')
+                    : t('course.purchase', { price: formatPrice(displayPrice, displayCurrency) })}
               </Button>
             ) : (
               <Link to={paths.login} state={{ from: paths.trade(tradeSlug) }}>

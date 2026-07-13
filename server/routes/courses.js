@@ -2,6 +2,7 @@ import express from 'express';
 import Course from '../models/Course.js';
 import { protect } from '../middleware/auth.js';
 import { getCoursePricing } from '../utils/coursePricing.js';
+import { userOwnsCourse } from '../utils/userPurchases.js';
 
 const router = express.Router();
 
@@ -37,6 +38,7 @@ router.get('/', async (req, res) => {
         return {
           ...c.toObject(),
           ...pricing,
+          ownsCourse: Boolean(authUser && userOwnsCourse(authUser, c._id)),
         };
       })
     );
@@ -75,7 +77,7 @@ router.get('/:slug', async (req, res) => {
 
     // Check if user owns the course (if authenticated)
     let ownsCourse = false;
-    if (authUser && authUser.purchases.includes(course._id)) {
+    if (authUser && userOwnsCourse(authUser, course._id)) {
       ownsCourse = true;
     }
 
@@ -101,9 +103,7 @@ router.get('/:slug/access', protect, async (req, res) => {
     }
 
     const user = await import('../models/User.js').then(m => m.default.findById(req.user._id));
-    const hasAccess = user.purchases.some(
-      purchaseId => purchaseId.toString() === course._id.toString()
-    );
+    const hasAccess = userOwnsCourse(user, course._id);
 
     if (!hasAccess) {
       return res.status(403).json({ message: 'Access denied. Purchase required.' });

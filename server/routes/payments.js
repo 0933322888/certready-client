@@ -6,6 +6,7 @@ import Purchase from '../models/Purchase.js';
 import User from '../models/User.js';
 import { getCoursePricing } from '../utils/coursePricing.js';
 import { getValidPromo } from '../utils/promoService.js';
+import { userOwnsCourse } from '../utils/userPurchases.js';
 
 const router = express.Router();
 
@@ -118,29 +119,42 @@ router.post('/create-checkout-session', protect, async (req, res) => {
     }
 
     // Check if user already owns the course
-    if (user.purchases.includes(course._id)) {
+    if (userOwnsCourse(user, course._id)) {
       return res.status(400).json({ message: 'You already own this course' });
     }
 
-    // Free promo: grant access without Stripe
+    // Free promo / free window: grant access without Stripe
     if (chargeAmountCents === 0) {
       const freeSource = promo?.code ?? (isFreeWindowActive ? 'free_window' : 'promo');
       const freeSessionId = `free_${freeSource}_${req.user._id}_${course._id}`;
-      await Purchase.create({
-        user: req.user._id,
-        course: course._id,
-        stripeSessionId: freeSessionId,
-        amount: 0,
-        currency: course.currency || 'cad',
-        promoCode: promo?.code,
-        status: 'completed',
-        completedAt: new Date(),
-      });
-      user.purchases.push(course._id);
-      await user.save();
+
+      let purchase = await Purchase.findOne({ stripeSessionId: freeSessionId });
+      if (!purchase) {
+        try {
+          purchase = await Purchase.create({
+            user: req.user._id,
+            course: course._id,
+            stripeSessionId: freeSessionId,
+            amount: 0,
+            currency: course.currency || 'cad',
+            promoCode: promo?.code,
+            status: 'completed',
+            completedAt: new Date(),
+          });
+        } catch (err) {
+          // Concurrent claim: unique session id already created
+          purchase = await Purchase.findOne({ stripeSessionId: freeSessionId });
+          if (!purchase) throw err;
+        }
+      }
+
+      if (!userOwnsCourse(user, course._id)) {
+        user.purchases.push(course._id);
+        await user.save();
+      }
 
       const successUrl = `${process.env.CLIENT_URL}/checkout/success?session_id=${encodeURIComponent(freeSessionId)}`;
-      return res.json({ sessionId: freeSessionId, url: successUrl, isFreeWindowActive, freeUntil });
+      return res.json({ sessionId: freeSessionId, url: successUrl, isFree: true, isFreeWindowActive, freeUntil });
     }
 
     const stripe = getStripe();
@@ -235,7 +249,7 @@ router.post('/webhook', async (req, res) => {
 
       // Add course to user's purchases
       const user = await User.findById(purchase.user);
-      if (user && !user.purchases.includes(purchase.course)) {
+      if (user && !userOwnsCourse(user, purchase.course)) {
         user.purchases.push(purchase.course);
         await user.save();
       }
@@ -280,7 +294,7 @@ router.get('/verify/:sessionId', protect, async (req, res) => {
 
           // Add course to user's purchases
           const user = await User.findById(req.user._id);
-          if (user && !user.purchases.includes(purchase.course._id)) {
+          if (user && !userOwnsCourse(user, purchase.course._id)) {
             user.purchases.push(purchase.course._id);
             await user.save();
           }

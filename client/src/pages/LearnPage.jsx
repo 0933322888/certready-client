@@ -21,7 +21,7 @@ export default function LearnPage() {
   const { slug } = useParams();
   const navigate = useNavigate();
   const { i18n, t } = useTranslation();
-  const { user, loading: authLoading } = useAuth();
+  const { user, loading: authLoading, refreshUser } = useAuth();
   const { pricing } = useCoursePricingBySlug(slug);
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [purchasing, setPurchasing] = useState(false);
@@ -35,10 +35,39 @@ export default function LearnPage() {
 
   const course = getCourse(slug, i18n.language);
 
-  // Derive access from user purchases (stable dependency: user, not a function)
   const userHasAccess = Boolean(
-    user?.purchases?.some((p) => p && p.slug === slug)
+    user?.purchases?.some((p) => p && p.slug === slug) || pricing?.ownsCourse
   );
+
+  // Auto-claim free-window access so new members unlock content without a separate checkout click
+  useEffect(() => {
+    if (authLoading || !user || !slug || !pricing || userHasAccess) return;
+    if (!pricing.isFreeWindowActive) return;
+
+    let cancelled = false;
+
+    (async () => {
+      try {
+        const res = await api.post('/payments/create-checkout-session', { courseSlug: slug });
+        if (cancelled) return;
+        if (res.data?.isFree || res.data?.sessionId?.startsWith('free_')) {
+          await refreshUser();
+          return;
+        }
+        if (res.data?.url) {
+          window.location.href = res.data.url;
+        }
+      } catch (err) {
+        if (cancelled) return;
+        // Already owned (or race): refresh so access unlocks
+        if (err.response?.status === 400) {
+          await refreshUser();
+        }
+      }
+    })();
+
+    return () => { cancelled = true; };
+  }, [authLoading, user, slug, pricing, userHasAccess, refreshUser]);
 
   useEffect(() => {
     if (!course) {
@@ -60,7 +89,6 @@ export default function LearnPage() {
       setLastChapter(course.id, chapter.id);
     }
     setLoading(false);
-    // Scroll to top when opening the learn page (e.g. from Preview button) so we don't land mid-content
     window.scrollTo({ top: 0, behavior: 'auto' });
   }, [slug, userHasAccess, navigate, course]);
 
@@ -68,7 +96,6 @@ export default function LearnPage() {
     const chapter = getChapterById(chapterId, course);
     if (!chapter) return;
 
-    // Check if chapter is accessible
     const isAccessible = chapter.isFree || hasAccess;
     if (!isAccessible) {
       toast.error(t('learn.chapterRequiresAccess'));
@@ -79,13 +106,10 @@ export default function LearnPage() {
     setCurrentChapter(chapter);
     setLastChapter(course.id, chapterId);
     setSidebarOpen(false);
-    
-    // Scroll to top
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   const handleQuestionComplete = () => {
-    // Mark chapter as complete when all questions are answered
     if (currentChapter && currentChapter.practiceQuestions && course) {
       markChapterComplete(course.id, currentChapter.id);
       toast.success(t('learn.progressSaved'));
@@ -94,8 +118,12 @@ export default function LearnPage() {
 
   const fullPrice = pricing?.fullPrice ?? pricing?.currentPrice ?? course?.price;
   const fullCurrency = pricing?.currency ?? course?.currency ?? 'CAD';
-  // When no promo applied, show full price from static course data
-  const displayPrice = appliedPromo ? appliedPromo.amountCents : (course?.price ?? fullPrice);
+  const isFreeOffer = Boolean(
+    appliedPromo?.amountCents === 0 || (!appliedPromo && pricing?.isFreeWindowActive)
+  );
+  const displayPrice = appliedPromo
+    ? appliedPromo.amountCents
+    : (pricing?.currentPrice ?? course?.price ?? fullPrice);
   const displayCurrency = appliedPromo ? appliedPromo.currency : fullCurrency;
 
   const handleApplyPromo = async () => {
@@ -134,12 +162,22 @@ export default function LearnPage() {
         courseSlug: slug,
         promoCode: appliedPromo?.code || undefined,
       });
+      if (res.data?.isFree || res.data?.sessionId?.startsWith('free_')) {
+        await refreshUser();
+        toast.success(t('checkout.successTitle'));
+        setPurchasing(false);
+        return;
+      }
       if (res.data?.url) {
         window.location.href = res.data.url;
         return;
       }
     } catch (err) {
-      toast.error(err.response?.data?.message || t('course.checkoutFailed'));
+      if (err.response?.status === 400) {
+        await refreshUser();
+      } else {
+        toast.error(err.response?.data?.message || t('course.checkoutFailed'));
+      }
     }
     setPurchasing(false);
   };
@@ -160,15 +198,15 @@ export default function LearnPage() {
     );
   }
 
-  // Check if current chapter is accessible
   const isChapterAccessible = currentChapter.isFree || hasAccess;
-
   const learnSeo = getLearnPageSEO(course, currentChapter);
+  const purchaseLabel = isFreeOffer
+    ? t('course.claimFreeAccess')
+    : `${t('lockOverlay.getAccess')} — ${formatPrice(displayPrice, displayCurrency)}`;
 
   return (
     <div className="flex min-h-screen bg-bg">
       {learnSeo && <SEO {...learnSeo} />}
-      {/* Mobile Menu Button */}
       <button
         onClick={() => setSidebarOpen(!sidebarOpen)}
         className="fixed top-20 left-4 z-30 md:hidden bg-surface border border-border rounded-lg p-2 shadow-lg"
@@ -183,52 +221,53 @@ export default function LearnPage() {
         </svg>
       </button>
 
-      {/* Sidebar */}
       <ChapterSidebar
         course={course}
         currentChapterId={currentChapterId}
         onChapterSelect={handleChapterSelect}
         onClose={sidebarOpen}
+        hasAccess={hasAccess}
       />
 
-      {/* Main Content */}
       <div className="flex-1 md:ml-80 min-h-screen">
-        {/* Sticky Header */}
         <div className="sticky top-16 z-20 bg-surface/95 backdrop-blur-sm border-b border-border px-4 sm:px-6 lg:px-8 py-4">
           <div className="max-w-4xl mx-auto">
             <h1 className="text-lg font-display font-semibold text-text-primary">
               {course.title}
             </h1>
             <p className="text-sm text-text-muted">{currentChapter.title}</p>
-            {/* Purchase CTA when previewing without access */}
             {!hasAccess && (
               <div className="mt-3 pt-3 border-t border-border space-y-2">
                 <div className="flex flex-wrap items-center justify-between gap-3">
                   <span className="text-sm text-text-muted">
-                    {t('lockOverlay.title')}
+                    {isFreeOffer ? t('course.freeWindowOffer') : t('lockOverlay.title')}
                   </span>
                   <span className="text-sm font-semibold text-accent">
                     {formatPrice(displayPrice, displayCurrency)}
                   </span>
                 </div>
                 <div className="flex flex-col sm:flex-row gap-2 w-full sm:items-center">
-                  <input
-                    type="text"
-                    value={promoCode}
-                    onChange={(e) => handlePromoInputChange(e.target.value)}
-                    placeholder={t('course.promoCodePlaceholder')}
-                    className="flex-1 min-w-0 px-3 py-2 rounded-lg border border-border bg-surface text-text-primary text-sm placeholder:text-text-muted focus:outline-none focus:ring-2 focus:ring-accent"
-                    aria-label={t('course.promoCodeLabel')}
-                  />
-                  <Button
-                    type="button"
-                    variant="outline"
-                    size="sm"
-                    onClick={handleApplyPromo}
-                    disabled={applyingPromo || !promoCode.trim() || !user}
-                  >
-                    {applyingPromo ? t('course.processing') : t('course.promoCodeApply')}
-                  </Button>
+                  {!isFreeOffer && (
+                    <>
+                      <input
+                        type="text"
+                        value={promoCode}
+                        onChange={(e) => handlePromoInputChange(e.target.value)}
+                        placeholder={t('course.promoCodePlaceholder')}
+                        className="flex-1 min-w-0 px-3 py-2 rounded-lg border border-border bg-surface text-text-primary text-sm placeholder:text-text-muted focus:outline-none focus:ring-2 focus:ring-accent"
+                        aria-label={t('course.promoCodeLabel')}
+                      />
+                      <Button
+                        type="button"
+                        variant="outline"
+                        size="sm"
+                        onClick={handleApplyPromo}
+                        disabled={applyingPromo || !promoCode.trim() || !user}
+                      >
+                        {applyingPromo ? t('course.processing') : t('course.promoCodeApply')}
+                      </Button>
+                    </>
+                  )}
                   <Button
                     onClick={handlePurchase}
                     disabled={purchasing}
@@ -236,7 +275,7 @@ export default function LearnPage() {
                     className="flex-shrink-0"
                   >
                     {user
-                      ? (purchasing ? t('course.processing') : `${t('lockOverlay.getAccess')} — ${formatPrice(displayPrice, displayCurrency)}`)
+                      ? (purchasing ? t('course.processing') : purchaseLabel)
                       : t('course.signInToPurchase')}
                   </Button>
                 </div>
@@ -245,7 +284,6 @@ export default function LearnPage() {
           </div>
         </div>
 
-        {/* Content Area */}
         <div className="relative px-4 sm:px-6 lg:px-8 py-8">
           <div className="max-w-4xl mx-auto">
             {isChapterAccessible ? (
@@ -265,7 +303,7 @@ export default function LearnPage() {
                 </div>
                 <LockOverlay
                   courseSlug={slug}
-                  price={formatPrice(pricing?.currentPrice ?? course.price, pricing?.currency ?? course.currency)}
+                  price={formatPrice(displayPrice, displayCurrency)}
                   onPurchase={handlePurchase}
                   purchasing={purchasing}
                 />

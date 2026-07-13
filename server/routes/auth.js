@@ -14,6 +14,22 @@ const googleClient = process.env.GOOGLE_CLIENT_ID
 const generateToken = (id) =>
   jwt.sign({ id }, process.env.JWT_SECRET, { expiresIn: '30d' });
 
+/** Auth responses must include populated course purchases (slug) for client access checks. */
+async function buildAuthUser(userId) {
+  const user = await User.findById(userId)
+    .select('-password')
+    .populate('purchases', 'slug title tradeCode');
+  if (!user) return null;
+  return {
+    id: user._id,
+    _id: user._id,
+    name: user.name,
+    email: user.email,
+    purchases: (user.purchases || []).filter(Boolean),
+    createdAt: user.createdAt,
+  };
+}
+
 // @route   POST /api/auth/register
 // @desc    Register a new user
 // @access  Public
@@ -40,14 +56,10 @@ router.post('/register', async (req, res) => {
       password,
     });
 
+    const authUser = await buildAuthUser(user._id);
     res.status(201).json({
       token: generateToken(user._id),
-      user: {
-        id: user._id,
-        name: user.name,
-        email: user.email,
-        purchases: user.purchases,
-      },
+      user: authUser,
     });
   } catch (error) {
     res.status(500).json({ message: error.message });
@@ -75,14 +87,10 @@ router.post('/login', async (req, res) => {
       return res.status(401).json({ message: 'Invalid credentials' });
     }
 
+    const authUser = await buildAuthUser(user._id);
     res.json({
       token: generateToken(user._id),
-      user: {
-        id: user._id,
-        name: user.name,
-        email: user.email,
-        purchases: user.purchases,
-      },
+      user: authUser,
     });
   } catch (error) {
     res.status(500).json({ message: error.message });
@@ -115,14 +123,10 @@ router.post('/google', async (req, res) => {
 
     let user = await User.findOne({ googleId });
     if (user) {
+      const authUser = await buildAuthUser(user._id);
       res.json({
         token: generateToken(user._id),
-        user: {
-          id: user._id,
-          name: user.name,
-          email: user.email,
-          purchases: user.purchases,
-        },
+        user: authUser,
       });
       return;
     }
@@ -131,14 +135,10 @@ router.post('/google', async (req, res) => {
     if (user) {
       user.googleId = googleId;
       await user.save({ validateBeforeSave: false });
+      const authUser = await buildAuthUser(user._id);
       res.json({
         token: generateToken(user._id),
-        user: {
-          id: user._id,
-          name: user.name,
-          email: user.email,
-          purchases: user.purchases,
-        },
+        user: authUser,
       });
       return;
     }
@@ -149,14 +149,10 @@ router.post('/google', async (req, res) => {
       googleId,
     });
 
+    const authUser = await buildAuthUser(user._id);
     res.status(201).json({
       token: generateToken(user._id),
-      user: {
-        id: user._id,
-        name: user.name,
-        email: user.email,
-        purchases: user.purchases || [],
-      },
+      user: authUser,
     });
   } catch (error) {
     console.error('Google auth error:', error.message);
@@ -172,11 +168,11 @@ router.post('/google', async (req, res) => {
 // @access  Private
 router.get('/me', protect, async (req, res) => {
   try {
-    const user = await User.findById(req.user._id)
-      .select('-password')
-      .populate('purchases', 'slug title tradeCode');
-    
-    res.json(user);
+    const authUser = await buildAuthUser(req.user._id);
+    if (!authUser) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+    res.json(authUser);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
