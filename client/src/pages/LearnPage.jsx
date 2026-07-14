@@ -67,19 +67,16 @@ export default function LearnPage() {
     const chapter = getChapterById(chapterId, course);
     if (!chapter) return;
 
-    const isAccessible = chapter.isMockExam
-      ? userHasMockExam
+    // Allow opening mock exam chapter with course access so unlock UI can show
+    const canOpen = chapter.isMockExam
+      ? (userHasMockExam || hasAccess)
       : (chapter.isFree || hasAccess);
-    if (!isAccessible) {
-      toast.error(
-        chapter.isMockExam
-          ? t('mockExam.requiresPaidAccess')
-          : t('learn.chapterRequiresAccess')
-      );
+    if (!canOpen) {
+      toast.error(t('learn.chapterRequiresAccess'));
       return;
     }
 
-    setCurrentChapterId(chapterId);
+    setCurrentChapterId(chapter.id);
     setCurrentChapter(chapter);
     setLastChapter(course.id, chapterId);
     setSidebarOpen(false);
@@ -185,9 +182,11 @@ export default function LearnPage() {
     ? userHasMockExam
     : (currentChapter.isFree || hasAccess);
   const learnSeo = getLearnPageSEO(course, currentChapter);
-  const purchaseLabel = isFreeOffer
-    ? t('course.claimFreeAccess')
-    : `${t('lockOverlay.getAccess')} — ${formatPrice(displayPrice, displayCurrency)}`;
+  const purchaseLabel = unlockingMockExam
+    ? `${t('mockExam.unlockCta')} — ${formatPrice(displayPrice, displayCurrency)}`
+    : isFreeOffer
+      ? t('course.claimFreeAccess')
+      : `${t('lockOverlay.getAccess')} — ${formatPrice(displayPrice, displayCurrency)}`;
 
   return (
     <div className="flex min-h-screen bg-bg">
@@ -222,18 +221,22 @@ export default function LearnPage() {
               {course.title}
             </h1>
             <p className="text-sm text-text-muted">{currentChapter.title}</p>
-            {!hasAccess && (
+            {(!hasAccess || unlockingMockExam) && (
               <div className="mt-3 pt-3 border-t border-border space-y-2">
                 <div className="flex flex-wrap items-center justify-between gap-3">
                   <span className="text-sm text-text-muted">
-                    {isFreeOffer ? t('course.freeWindowOffer') : t('lockOverlay.title')}
+                    {unlockingMockExam
+                      ? t('mockExam.unlockBanner')
+                      : isFreeOffer
+                        ? t('course.freeWindowOffer')
+                        : t('lockOverlay.title')}
                   </span>
                   <span className="text-sm font-semibold text-accent">
                     {formatPrice(displayPrice, displayCurrency)}
                   </span>
                 </div>
                 <div className="flex flex-col sm:flex-row gap-2 w-full sm:items-center">
-                  {!isFreeOffer && (
+                  {(unlockingMockExam || !isFreeOffer) && (
                     <>
                       <input
                         type="text"
@@ -265,6 +268,13 @@ export default function LearnPage() {
                       : t('course.signInToPurchase')}
                   </Button>
                 </div>
+                {unlockingMockExam && appliedPromo && (
+                  <p className="text-sm text-accent-warm font-medium">
+                    {appliedPromo.amountCents === 0
+                      ? t('course.promoAppliedFree')
+                      : t('course.promoApplied')}
+                  </p>
+                )}
               </div>
             )}
           </div>
@@ -294,13 +304,14 @@ export default function LearnPage() {
                   purchasing={purchasing}
                   title={currentChapter.isMockExam ? t('mockExam.lockedTitle') : undefined}
                   description={currentChapter.isMockExam ? t('mockExam.requiresPaidAccess') : undefined}
-                  showPromo={Boolean(currentChapter.isMockExam)}
+                  showPromo={Boolean(currentChapter.isMockExam || unlockingMockExam)}
                   promoCode={promoCode}
                   onPromoCodeChange={handlePromoInputChange}
                   onApplyPromo={handleApplyPromo}
                   applyingPromo={applyingPromo}
                   appliedPromo={appliedPromo}
                   promoHint={t('course.promoCodeHint')}
+                  purchaseLabel={currentChapter.isMockExam ? t('mockExam.unlockCta') : undefined}
                 />
               </div>
             )}

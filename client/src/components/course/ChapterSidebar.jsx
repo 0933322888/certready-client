@@ -34,9 +34,17 @@ export default function ChapterSidebar({
     setExpandedParts(newExpanded);
   };
 
-  const isChapterAccessible = (chapter) => {
+  const isChapterContentUnlocked = (chapter) => {
     if (chapter.isMockExam) {
       return canAccessMockExam;
+    }
+    return chapter.isFree || hasAccess;
+  };
+
+  // Mock exam can be opened (shows unlock UI) once the user has course access
+  const isChapterSelectable = (chapter) => {
+    if (chapter.isMockExam) {
+      return canAccessMockExam || hasAccess;
     }
     return chapter.isFree || hasAccess;
   };
@@ -95,7 +103,8 @@ export default function ChapterSidebar({
                 {expandedParts.has(part.id) && (
                   <div className="ml-2 space-y-1">
                     {part.chapters.map((chapter) => {
-                      const isAccessible = isChapterAccessible(chapter);
+                      const isUnlocked = isChapterContentUnlocked(chapter);
+                      const isSelectable = isChapterSelectable(chapter);
                       const isActive = chapter.id === currentChapterId;
                       const isCompleted = progress.completed.includes(chapter.id);
 
@@ -103,19 +112,19 @@ export default function ChapterSidebar({
                         <button
                           key={chapter.id}
                           onClick={() => {
-                            if (isAccessible) {
+                            if (isSelectable) {
                               onChapterSelect(chapter.id);
                               if (onClose) onClose();
                             }
                           }}
-                          disabled={!isAccessible}
+                          disabled={!isSelectable}
                           className={`
                             w-full text-left px-3 py-2 rounded-lg text-sm
                             transition-all duration-200
                             ${
                               isActive
                                 ? 'bg-accent/20 border-l-4 border-accent text-accent font-medium'
-                                : isAccessible
+                                : isSelectable
                                 ? 'hover:bg-surface-2 text-text-muted'
                                 : 'text-text-dim cursor-not-allowed opacity-50'
                             }
@@ -136,7 +145,10 @@ export default function ChapterSidebar({
                               {chapter.isFree && !hasAccess && (
                                 <Badge variant="accent" className="text-xs">{t('course.freePreview')}</Badge>
                               )}
-                              {!isAccessible && (
+                              {chapter.isMockExam && hasAccess && !canAccessMockExam && (
+                                <Badge variant="accent" className="text-xs">{t('mockExam.unlockBadge')}</Badge>
+                              )}
+                              {!isUnlocked && (
                                 <svg className="w-4 h-4 text-accent-warm" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
                                 </svg>

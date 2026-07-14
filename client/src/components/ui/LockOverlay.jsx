@@ -18,6 +18,7 @@ export default function LockOverlay({
   applyingPromo = false,
   appliedPromo = null,
   promoHint = null,
+  purchaseLabel = null,
 }) {
   const navigate = useNavigate();
   const { t } = useTranslation();
@@ -94,7 +95,9 @@ export default function LockOverlay({
         )}
 
         <Button onClick={handleClick} size="lg" disabled={purchasing} className="w-full">
-          {purchasing ? t('course.processing') : `${t('lockOverlay.getAccess')} — ${price}`}
+          {purchasing
+            ? t('course.processing')
+            : `${purchaseLabel || t('lockOverlay.getAccess')} — ${price}`}
         </Button>
       </div>
     </div>
